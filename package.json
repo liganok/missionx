@@ -1,5 +1,5 @@
 {
-  "name": "newedenfaces",
+  "name": "mission",
   "description": "Character voting app for EVE Online",
   "version": "1.0.0",
   "repository": {
@@ -9,8 +9,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "watch": "nodemon server.js",
-    "postinstall": "bower install && gulp build"
+    "watch": "nodemon server.js"
   },
   "babel": {
     "presets": ["es2015", "react"]
