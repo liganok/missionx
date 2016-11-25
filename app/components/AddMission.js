@@ -1,6 +1,6 @@
 import React from 'react';
-import AddMissionStore from '../stores/AddMissionStore';
-import AddMissionActions from '../Actions/AddMissionActions';
+//import AddMissionStore from '../stores/AddMissionStore';
+//import AddMissionActions from '../Actions/AddMissionActions';
 
 class AddMission extends React.Component {
 	/*constructor(props) {
@@ -20,7 +20,7 @@ class AddMission extends React.Component {
 	onChange(state) {
 	    this.setState(state);
 	}*/
-	
+
 
 	
 
