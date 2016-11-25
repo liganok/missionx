@@ -1,7 +1,7 @@
 import alt from '../alt';
 
 class AddMissionActions {
-	constructor() {
+	constructor() { 
 		this.generateActions(
 			'addMissionSuccess',
 			'addMissionFail'

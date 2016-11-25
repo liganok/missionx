@@ -7,7 +7,7 @@ class AddMission extends React.Component {
 		super(props);
 		this.state = AddMissionStore.getState();
 		this.onChange = this.onChange.bind(this);
-	}
+	} 
 
 	componentDidMount() {
     	AddCharacterStore.listen(this.onChange);

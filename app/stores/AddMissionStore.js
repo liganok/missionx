@@ -1,7 +1,7 @@
 import alt from '../alt';
 import AddMissionActions from '../actions/AddMissionActions';
 
-class AddMissionStore {
+class AddMissionStore { 
 	constructor(){
 		this.bindActions(AddMissionActions);
 		this.missionName = '';
