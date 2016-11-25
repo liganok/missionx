@@ -21,13 +21,15 @@ class AddMission extends React.Component {
 	    this.setState(state);
 	}
 
+	
+
 
   render() {
     return (
 	    <div className="container">
 			<div className="row clearfix">
 				<div className="col-md-12 column">
-					<form role="form">
+					<form role="form" onSubmit={this.handleSubmit.bind(this)}>
 						<div className="form-group">
 							 <label className='control-label'>Mission for me</label>
 							 <input type="text" className="form-control" name="missionName" id="missionNameID" />
