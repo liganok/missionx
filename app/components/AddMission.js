@@ -24,7 +24,9 @@ class AddMission extends React.Component {
   }
 
 
+
   render() {
+    var missionList1 = AddMissionActions.getMissions();
     let missionList = AddMissionActions.getMissions().map((mission, index) => {
       return (
         <div key={mission.missionId} className='list-group-item animated fadeIn'>
