@@ -5,6 +5,7 @@ class AddMissionStore {
 	constructor(){
 		this.bindActions(AddMissionActions);
 		this.missionName = '';
+		this.missions = [];
 	}
 
 	onAddMissionSuccess(successMessage) {
