@@ -12,7 +12,6 @@ class AddMission extends React.Component {
 
   componentDidMount() {
     AddCharacterStore.listen(this.onChange);
-    AddMissionActions.getMissions();
   }
 
   componentWillUnmount() {
@@ -23,10 +22,18 @@ class AddMission extends React.Component {
     this.setState(state);
   }
 
+  handleSubmit(event){
+    event.preventDefault();
+
+    var name = this.state.name.trim();
+    if (name){
+      AddMissionActions.addMission(name);
+    }
+  }
+
 
 
   render() {
-    var missionList1 = AddMissionActions.getMissions();
     let missionList = AddMissionActions.getMissions().map((mission, index) => {
       return (
         <div key={mission.missionId} className='list-group-item animated fadeIn'>
@@ -42,10 +49,11 @@ class AddMission extends React.Component {
 
     return (
       <div className="container">
-        <form role="form">
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <div className="form-group">
             <label className='control-label'>Mission for me</label>
-            <input type="text" className="form-control" name="missionName" id="missionNameID"/>
+            <input type="text" className="form-control" ref="nameTextField" value={this.state.name}
+                   onChange={AddMissionActions.updateName} autoFocus/>
           </div>
 
           <button type="submit" className="btn btn-default">Submit</button>

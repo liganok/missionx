@@ -4,7 +4,8 @@ class AddMissionActions {
   constructor() {
     this.generateActions(
       'addMissionSuccess',
-      'addMissionFail'
+      'addMissionFail',
+      'updateName'
     );
   }
 

@@ -11,6 +11,12 @@ class AddMissionStore {
 	onAddMissionSuccess(successMessage) {
 
 	}
+
+  onUpdateName(event) {
+    this.name = event.target.value;
+    this.nameValidationState = '';
+    this.helpBlock = '';
+  }
 }
 
 export default alt.createStore(AddMissionStore);

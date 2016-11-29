@@ -36,8 +36,20 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Adds new mission to the database.
  */
 app.post('/api/missions', function (req, res, next) {
-  var misssionName = req.body.name;
-  var parser = new xml2js.Parse();
+  var name = req.body.name;
+
+  try {
+    var mission = new Mission({
+      name: name,
+    });
+    mission.save(function (err) {
+      if(err) return next(err);
+      res.send({message:name + 'has been added successfully!'});
+    });
+
+  }catch(e) {
+    res.status(404).send({ message: name + ' is not saved.' });
+  }
 });
 
 
