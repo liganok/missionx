@@ -11,7 +11,7 @@ class AddMission extends React.Component {
   }
 
   componentDidMount() {
-    //AddCharacterStore.listen(this.onChange);
+    AddCharacterStore.listen(this.onChange);
     AddMissionActions.getMissions();
   }
 

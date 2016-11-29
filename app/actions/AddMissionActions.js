@@ -8,8 +8,16 @@ class AddMissionActions {
     );
   }
 
-  addMission(missionName) {
-
+  addMission(name) {
+    $.ajax({
+      type: 'POST',
+      url: '/api/missions',
+      data: {name:name}
+    }).done((data)=>{
+      this.actions.addMissionSuccess(data.message);
+    }).fail((jqxhr)=>{
+      this.actions.addMissionFail(jqxhr.responseJSON.message);
+    });
   }
 
   getMissions() {
