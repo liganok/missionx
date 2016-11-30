@@ -1,21 +1,19 @@
 import alt from '../alt';
 import AddMissionActions from '../actions/AddMissionActions';
 
-class AddMissionStore { 
-	constructor(){
-		this.bindActions(AddMissionActions);
-		this.missionName = '';
-		this.missions = [];
-	}
+class AddMissionStore {
+  constructor() {
+    this.bindActions(AddMissionActions);
+    this.name = '';
+    this.missions = [];
+  }
 
-	onAddMissionSuccess(successMessage) {
+  onAddMissionSuccess(successMessage) {
 
-	}
+  }
 
   onUpdateName(event) {
     this.name = event.target.value;
-    this.nameValidationState = '';
-    this.helpBlock = '';
   }
 }
 

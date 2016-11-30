@@ -23,9 +23,9 @@ class AddMissionActions {
 
   getMissions() {
     var missions = new Array({missionID: "ID001", name: "mission01", description: "", status: true},
-      {missionID: "ID001", name: "mission02", description: "", status: true},
-      {missionID: "ID001", name: "mission03", description: "", status: true},
-      {missionID: "ID001", name: "mission04", description: "", status: true});
+      {missionID: "ID002", name: "mission02", description: "", status: true},
+      {missionID: "ID003", name: "mission03", description: "", status: true},
+      {missionID: "ID004", name: "mission04", description: "", status: true});
     return missions;
   }
 

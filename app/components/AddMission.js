@@ -7,38 +7,33 @@ class AddMission extends React.Component {
     super(props);
     this.state = AddMissionStore.getState();
     this.onChange = this.onChange.bind(this);
-
   }
 
   componentDidMount() {
-    AddCharacterStore.listen(this.onChange);
+    AddMissionStore.listen(this.onChange);
   }
 
   componentWillUnmount() {
-    AddCharacterStore.unlisten(this.onChange);
+    AddMissionStore.unlisten(this.onChange);
   }
 
   onChange(state) {
     this.setState(state);
   }
 
-  handleSubmit(event){
-    event.preventDefault();
-
+  handleSubmit(event) {
     var name = this.state.name.trim();
-    if (name){
+    if (name) {
       AddMissionActions.addMission(name);
     }
   }
-
-
 
   render() {
     let missionList = AddMissionActions.getMissions().map((mission, index) => {
       return (
         <div key={mission.missionId} className='list-group-item animated fadeIn'>
-          <div className="media-body">
-            <h4 className="media-heading">
+          <div className='media-body'>
+            <h4 className='media-heading'>
               {mission.name}
             </h4>
           </div>
@@ -46,19 +41,20 @@ class AddMission extends React.Component {
       );
     });
 
-
     return (
-      <div className="container">
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <div className="form-group">
-            <label className='control-label'>Mission for me</label>
-            <input type="text" className="form-control" ref="nameTextField" value={this.state.name}
-                   onChange={AddMissionActions.updateName} autoFocus/>
-          </div>
+      <div className='container'>
+        <div className='panel-heading'>Add Mission</div>
+        <div className='panel-body'>
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            <div className='form-group'>
+              <input type='text' className='form-control' ref='nameTextField' value={this.state.name}
+                     onChange={AddMissionActions.updateName} autoFocus/>
+            </div>
 
-          <button type="submit" className="btn btn-default">Submit</button>
-        </form>
-        <div className="list-group">
+            <button type='submit' className='btn btn-default'>Submit</button>
+          </form>
+        </div>
+        <div className='list-group'>
           {missionList}
         </div>
       </div>
