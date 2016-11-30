@@ -11,6 +11,7 @@ class AddMission extends React.Component {
 
   componentDidMount() {
     AddMissionStore.listen(this.onChange);
+    AddMissionActions.getMissions();
   }
 
   componentWillUnmount() {
@@ -29,9 +30,9 @@ class AddMission extends React.Component {
   }
 
   render() {
-    let missionList = AddMissionActions.getMissions().map((mission, index) => {
+    let missionList = this.state.missions.map((mission, index) => {
       return (
-        <div key={mission.missionId} className='list-group-item animated fadeIn'>
+        <div key={mission.name} className='list-group-item animated fadeIn'>
           <div className='media-body'>
             <h4 className='media-heading'>
               {mission.name}

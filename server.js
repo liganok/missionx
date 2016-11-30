@@ -52,6 +52,15 @@ app.post('/api/missions', function (req, res, next) {
   }
 });
 
+app.get('/api/missions', function(req, res, next) {
+  console.log("server response");
+  Mission
+    .find({})
+    .exec(function(err, missions) {
+      if (err) return next(err);
+      res.send(missions);
+    });
+});
 
 app.use(function (req, res) {
   Router.match({routes: routes.default, location: req.url}, function (err, redirectLocation, renderProps) {

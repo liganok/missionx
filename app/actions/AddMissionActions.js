@@ -5,6 +5,8 @@ class AddMissionActions {
     this.generateActions(
       'addMissionSuccess',
       'addMissionFail',
+      'getMissionsSuccess',
+      'getMissionsFail',
       'updateName'
     );
   }
@@ -22,11 +24,22 @@ class AddMissionActions {
   }
 
   getMissions() {
-    var missions = new Array({missionID: "ID001", name: "mission01", description: "", status: true},
+    /*var missions = new Array({missionID: "ID001", name: "mission01", description: "", status: true},
       {missionID: "ID002", name: "mission02", description: "", status: true},
       {missionID: "ID003", name: "mission03", description: "", status: true},
-      {missionID: "ID004", name: "mission04", description: "", status: true});
-    return missions;
+      {missionID: "ID004", name: "mission04", description: "", status: true});*/
+    let url = '/api/missions';
+    let params = {};
+
+    $.ajax({
+      type: 'GET',
+      url: '/api/missions',
+      data: params
+    }).done((data)=>{
+      this.actions.getMissionsSuccess(data);
+    }).fail((jqxhr)=>{
+      this.actions.getMissionsFail(jqxhr.responseJSON.message);
+    });
   }
 
 }

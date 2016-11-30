@@ -9,7 +9,11 @@ class AddMissionStore {
   }
 
   onAddMissionSuccess(successMessage) {
+    //AddMissionActions.getMissions();
+  }
 
+  onGetMissionsSuccess(data) {
+    this.missions = data;
   }
 
   onUpdateName(event) {
