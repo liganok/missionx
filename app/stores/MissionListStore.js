@@ -14,8 +14,9 @@ class MissionListStore {
   }
 
   onUpdateStatus(event) {
-    this.isDone = event.target.value;
-    alert(this.isDone);
+    this.isDone = event.target.checked;
+    //alert(event.target.id);
+    alert(event.target.parentNode.parentNode.className);
 }
 
 }

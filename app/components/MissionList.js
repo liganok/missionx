@@ -26,12 +26,10 @@ class MissionList extends React.Component {
   render() {
     let missionList = this.state.missions.map((mission, index) => {
       return (
-        <div key={mission._id} className='list-group-item animated fadeIn'>
-          <div className='media-body'>
+        <div id={mission._id} className='list-group-item animated fadeIn'>
             <h4 className='media-heading'>
-              <input type='checkbox' id="cb_Id" ref="mycheckbox" value={this.state.isDone} onChange={MissionListActions.updateStatus}>    {mission.name}</input>
+              <input type='checkbox' id="cb_Id" ref="mycheckbox"  onChange={MissionListActions.updateStatus}>    {mission.name}</input>
             </h4>
-          </div>
         </div>
       );
     });
