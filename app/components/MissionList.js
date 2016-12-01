@@ -22,13 +22,14 @@ class MissionList extends React.Component {
     this.setState(state);
   }
 
+
   render() {
     let missionList = this.state.missions.map((mission, index) => {
       return (
         <div key={mission._id} className='list-group-item animated fadeIn'>
           <div className='media-body'>
             <h4 className='media-heading'>
-              {mission.name}
+              <input type='checkbox' id="cb_Id" ref="mycheckbox" value={this.state.isDone} onChange={MissionListActions.updateStatus}>    {mission.name}</input>
             </h4>
           </div>
         </div>

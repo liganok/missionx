@@ -4,7 +4,8 @@ class MissionListActions {
   constructor() {
     this.generateActions(
       'getMissionsSuccess',
-      'getMissionsFail'
+      'getMissionsFail',
+      'updateStatus'
     );
   }
 
