@@ -1,6 +1,7 @@
 import React from 'react';
 import AddMissionStore from '../stores/AddMissionStore';
 import AddMissionActions from '../actions/AddMissionActions';
+import MissionList from './MissionList';
 
 class AddMission extends React.Component {
   constructor(props) {
@@ -11,7 +12,6 @@ class AddMission extends React.Component {
 
   componentDidMount() {
     AddMissionStore.listen(this.onChange);
-    AddMissionActions.getMissions();
   }
 
   componentWillUnmount() {
@@ -30,18 +30,6 @@ class AddMission extends React.Component {
   }
 
   render() {
-    let missionList = this.state.missions.map((mission, index) => {
-      return (
-        <div key={mission.name} className='list-group-item animated fadeIn'>
-          <div className='media-body'>
-            <h4 className='media-heading'>
-              {mission.name}
-            </h4>
-          </div>
-        </div>
-      );
-    });
-
     return (
       <div className='container'>
         <div className='panel-heading'>Add Mission</div>
@@ -55,9 +43,7 @@ class AddMission extends React.Component {
             <button type='submit' className='btn btn-default'>Submit</button>
           </form>
         </div>
-        <div className='list-group'>
-          {missionList}
-        </div>
+        <MissionList />
       </div>
     );
   }

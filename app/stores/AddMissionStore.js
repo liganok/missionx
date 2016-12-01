@@ -5,15 +5,10 @@ class AddMissionStore {
   constructor() {
     this.bindActions(AddMissionActions);
     this.name = '';
-    this.missions = [];
   }
 
   onAddMissionSuccess(successMessage) {
     //AddMissionActions.getMissions();
-  }
-
-  onGetMissionsSuccess(data) {
-    this.missions = data;
   }
 
   onUpdateName(event) {
