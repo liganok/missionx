@@ -11,7 +11,7 @@ class MissionList extends React.Component {
 
   componentDidMount() {
     MissionListStore.listen(this.onChange);
-    MissionListActions.getMissions();
+    MissionListActions.getMissions(this.props.type);
   }
 
   componentWillUnmount() {
@@ -28,7 +28,7 @@ class MissionList extends React.Component {
       return (
         <div id={mission._id} className='list-group-item animated fadeIn'>
             <h4 className='media-heading'>
-              <input type='checkbox' id="cb_Id" ref="mycheckbox"  onChange={MissionListActions.updateStatus}>    {mission.name}</input>
+              <input type='checkbox' checked={mission.isDone}  onChange={MissionListActions.changeStatus}>    {mission.name}</input>
             </h4>
         </div>
       );

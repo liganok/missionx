@@ -52,10 +52,36 @@ app.post('/api/missions', function (req, res, next) {
   }
 });
 
+app.put('/api/missions', function (req, res, next) {
+  var missionId = req.body.missionId;
+  var isDone = req.body.isDone;;
+  console.log(missionId + isDone);
+  if(missionId){
+    console.log(missionId + isDone + '2');
+    try {
+      Mission.update({'_id':missionId},{ $set: {'isDone':isDone}},function (err) {
+        console.log(missionId + isDone + '3');
+        if(err) return next(err);
+        res.send({message:missionId + 'has been updated successfully!'});
+      });
+
+    }catch(e) {
+      res.status(404).send({ message: missionId + ' is not saved.' });
+    }
+  }
+});
+
 app.get('/api/missions', function(req, res, next) {
-  console.log("server response");
+  var isDone;
+  console.log(req.query.type);
+  if(req.query.type == 'TODO'){
+    isDone = false;
+  }else{
+    isDone = true;
+  }
+  console.log(isDone);
   Mission
-    .find({})
+    .find({'isDone':isDone})
     .exec(function(err, missions) {
       if (err) return next(err);
       res.send(missions);

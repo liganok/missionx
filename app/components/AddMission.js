@@ -32,18 +32,20 @@ class AddMission extends React.Component {
   render() {
     return (
       <div className='container'>
-        <div className='panel-heading'>Add Mission</div>
-        <div className='panel-body'>
+        <div>
+          <div className='panel-heading'>Add Mission</div>
           <form onSubmit={this.handleSubmit.bind(this)}>
             <div className='form-group'>
               <input type='text' className='form-control' ref='nameTextField' value={this.state.name}
                      onChange={AddMissionActions.updateName} autoFocus/>
             </div>
-
             <button type='submit' className='btn btn-default'>Submit</button>
           </form>
         </div>
-        <MissionList />
+        <div>
+          <div className='panel-heading'>To Do</div>
+          <MissionList id='type2' type='TODO'/>
+        </div>
       </div>
     );
   }
