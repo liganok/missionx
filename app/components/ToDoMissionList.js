@@ -1,21 +1,21 @@
 import React from 'react';
-import MissionListStore from '../stores/MissionListStore';
-import MissionListActions from '../actions/MissionListActions';
+import ToDoMissionListStore from '../stores/ToDoMissionListStore';
+import ToDoMissionListActions from '../actions/ToDoMissionListActions';
 
-class MissionList extends React.Component {
+class ToDoMissionList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = MissionListStore.getState();
+    this.state = ToDoMissionListStore.getState();
     this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-    MissionListStore.listen(this.onChange);
-    MissionListActions.getMissions(this.props.type);
+    ToDoMissionListStore.listen(this.onChange);
+    ToDoMissionListActions.getMissions(this.props.type);
   }
 
   componentWillUnmount() {
-    MissionListStore.unlisten(this.onChange);
+    ToDoMissionListStore.unlisten(this.onChange);
   }
 
   onChange(state) {
@@ -28,7 +28,7 @@ class MissionList extends React.Component {
       return (
         <div id={mission._id} className='list-group-item animated fadeIn'>
             <h4 className='media-heading'>
-              <input type='checkbox' checked={mission.isDone}  onChange={MissionListActions.changeStatus}>    {mission.name}</input>
+              <input type='checkbox' checked={mission.isDone}  onChange={ToDoMissionListActions.changeStatus}>    {mission.name}</input>
             </h4>
         </div>
       );
@@ -44,6 +44,6 @@ class MissionList extends React.Component {
   }
 }
 
-export default MissionList;
+export default ToDoMissionList;
 
 

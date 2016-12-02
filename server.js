@@ -54,7 +54,7 @@ app.post('/api/missions', function (req, res, next) {
 
 app.put('/api/missions', function (req, res, next) {
   var missionId = req.body.missionId;
-  var isDone = req.body.isDone;;
+  var isDone = req.body.isDone;
   console.log(missionId + isDone);
   if(missionId){
     console.log(missionId + isDone + '2');

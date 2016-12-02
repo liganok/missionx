@@ -1,9 +1,11 @@
 import alt from '../alt';
-import MissionListActions from '../actions/MissionListActions';
+import ToDoMissionListActions from '../actions/ToDoMissionListActions';
+import DoneMissionListActions from '../actions/DoneMissionListActions';
 
-class MissionListStore {
+class DoneMissionListStore {
   constructor() {
-    this.bindActions(MissionListActions);
+    this.bindActions(DoneMissionListActions);
+    this.bindAction(ToDoMissionListActions.updateMissionsSuccess, this.handleUpdateMissionsSuccess)
     this.missions = [];
     this.isDone;
     this.missionId = '';
@@ -16,7 +18,7 @@ class MissionListStore {
   onChangeStatus(event) {
     this.isDone = event.target.checked;
     this.missionId = event.target.parentNode.parentNode.id;
-    MissionListActions.updateStatus(this.missionId, this.isDone);
+    DoneMissionListActions.updateStatus(this.missionId, this.isDone);
   }
 
   onUpdateMissionsSuccess(data) {
@@ -32,6 +34,10 @@ class MissionListStore {
     alert(errorMessage);
   }
 
+  handleUpdateMissionsSuccess(data){
+    DoneMissionListActions.getMissions();
+  }
+
 }
 
-export default alt.createStore(MissionListStore);
+export default alt.createStore(DoneMissionListStore);

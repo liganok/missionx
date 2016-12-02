@@ -1,6 +1,6 @@
 import alt from '../alt';
 
-class MissionListActions {
+class ToDoMissionListActions {
   constructor() {
     this.generateActions(
       'getMissionsSuccess',
@@ -12,14 +12,10 @@ class MissionListActions {
   }
 
   getMissions(type) {
-    /*var missions = new Array({missionID: "ID001", name: "mission01", description: "", status: true},
-     {missionID: "ID002", name: "mission02", description: "", status: true},
-     {missionID: "ID003", name: "mission03", description: "", status: true},
-     {missionID: "ID004", name: "mission04", description: "", status: true});*/
     $.ajax({
       type: 'GET',
       url: '/api/missions',
-      data:{type:type}
+      data:{type:'DONE'}
     }).done((data)=> {
       this.actions.getMissionsSuccess(data);
     }).fail((jqxhr)=> {
@@ -33,7 +29,7 @@ class MissionListActions {
       url: '/api/missions',
       data: {isDone:isDone, missionId:missionId}
     }).done((data)=>{
-      this.actions.updateMissionsSuccess(data.message);
+      this.actions.updateMissionsSuccess(data);
     }).fail((jqxhr)=>{
       this.actions.updateMissionsFail(jqxhr.responseJSON.message);
     });
@@ -42,4 +38,4 @@ class MissionListActions {
 
 }
 
-export default alt.createActions(MissionListActions);
+export default alt.createActions(ToDoMissionListActions);

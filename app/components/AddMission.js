@@ -1,7 +1,8 @@
 import React from 'react';
 import AddMissionStore from '../stores/AddMissionStore';
 import AddMissionActions from '../actions/AddMissionActions';
-import MissionList from './MissionList';
+import ToDoMissionList from './ToDoMissionList';
+import DoneMissionList from './DoneMissionList';
 
 class AddMission extends React.Component {
   constructor(props) {
@@ -44,7 +45,11 @@ class AddMission extends React.Component {
         </div>
         <div>
           <div className='panel-heading'>To Do</div>
-          <MissionList id='type2' type='TODO'/>
+          <ToDoMissionList type='TODO'/>
+        </div>
+        <div>
+          <div className='panel-heading'>Done</div>
+          <DoneMissionList type='Done'/>
         </div>
       </div>
     );
