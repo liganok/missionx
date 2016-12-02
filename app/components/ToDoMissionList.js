@@ -27,15 +27,17 @@ class ToDoMissionList extends React.Component {
     let missionList = this.state.missions.map((mission, index) => {
       return (
         <div id={mission._id} className='list-group-item animated fadeIn'>
-            <h4 className='media-heading'>
-              <input type='checkbox' checked={mission.isDone}  onChange={ToDoMissionListActions.changeStatus}>    {mission.name}</input>
-            </h4>
+          <h4 className='media-heading'>
+            <input type='checkbox' checked={mission.isDone}
+                   onChange={ToDoMissionListActions.changeStatus}>    {mission.name}</input>
+          </h4>
         </div>
       );
     });
 
     return (
       <div className='container'>
+        <div className='panel-heading'>To Do</div>
         <div className='list-group'>
           {missionList}
         </div>

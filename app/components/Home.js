@@ -8,14 +8,8 @@ class Home extends React.Component {
     return (
       <div className="container">
         <AddMission/>
-        <div>
-          <div className='panel-heading'>To Do</div>
-          <ToDoMissionList type='TODO'/>
-        </div>
-        <div>
-          <div className='panel-heading'>Done</div>
-          <DoneMissionList type='Done'/>
-        </div>
+        <ToDoMissionList type='TODO'/>
+        <DoneMissionList type='Done'/>
       </div>
     );
   }
