@@ -1,8 +1,6 @@
 import React from 'react';
 import AddMissionStore from '../stores/AddMissionStore';
 import AddMissionActions from '../actions/AddMissionActions';
-import ToDoMissionList from './ToDoMissionList';
-import DoneMissionList from './DoneMissionList';
 
 class AddMission extends React.Component {
   constructor(props) {
@@ -35,21 +33,11 @@ class AddMission extends React.Component {
       <div className='container'>
         <div>
           <div className='panel-heading'>Add Mission</div>
-          <form onSubmit={this.handleSubmit.bind(this)}>
-            <div className='form-group'>
-              <input type='text' className='form-control' ref='nameTextField' value={this.state.name}
-                     onChange={AddMissionActions.updateName} autoFocus/>
-            </div>
-            <button type='submit' className='btn btn-default'>Submit</button>
-          </form>
-        </div>
-        <div>
-          <div className='panel-heading'>To Do</div>
-          <ToDoMissionList type='TODO'/>
-        </div>
-        <div>
-          <div className='panel-heading'>Done</div>
-          <DoneMissionList type='Done'/>
+          <div className='form-group'>
+            <input type='text' className='form-control' ref='nameTextField' value={this.state.name}
+                   onChange={AddMissionActions.updateName} autoFocus/>
+          </div>
+          <button type='submit' className='btn btn-default' onClick={this.handleSubmit.bind(this)}>Submit</button>
         </div>
       </div>
     );

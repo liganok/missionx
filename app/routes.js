@@ -8,8 +8,8 @@ import DoneMissionList from './components/DoneMissionList';
 
 export default (
   <Route component={App}>
-    <Route path='/' component={AddMission} />
+    <Route path='/' component={Home} />
     <Route path='/todolist' component={ToDoMissionList} />
-    <Route path='/donelist' component={DoneMissionList} />
+    <Route path='/home' component={Home} />
   </Route>
 );

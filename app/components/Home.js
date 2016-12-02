@@ -1,21 +1,22 @@
 import React from 'react';
+import ToDoMissionList from './ToDoMissionList';
+import DoneMissionList from './DoneMissionList';
+import AddMission from './AddMission';
 
 class Home extends React.Component {
   render() {
     return (
-	    <div className="container">
-			<div className="row clearfix">
-				<div className="col-md-12 column">
-					<form role="form">
-						<div className="form-group">
-							 <label for="exampleInputPassword1">Mission</label><input type="text" className="form-control" id="exampleInputPassword1" />
-						</div>
-
-						<button type="submit" className="btn btn-default">Submit</button>
-					</form>
-				</div>
-			</div>
-		</div>
+      <div className="container">
+        <AddMission/>
+        <div>
+          <div className='panel-heading'>To Do</div>
+          <ToDoMissionList type='TODO'/>
+        </div>
+        <div>
+          <div className='panel-heading'>Done</div>
+          <DoneMissionList type='Done'/>
+        </div>
+      </div>
     );
   }
 }
