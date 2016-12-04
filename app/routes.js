@@ -10,6 +10,6 @@ export default (
   <Route component={App}>
     <Route path='/' component={Home} />
     <Route path='/todolist' component={ToDoMissionList} />
-    <Route path='/home' component={Home} />
+    <Route path='/donelist' component={DoneMissionList} />
   </Route>
 );
