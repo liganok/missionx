@@ -6,7 +6,7 @@ import AddMission from './AddMission';
 class Home extends React.Component {
   render() {
     return (
-      <div>
+      <div className="lg-side">
         <AddMission/>
         <ToDoMissionList type='TODO'/>
         <DoneMissionList type='Done'/>

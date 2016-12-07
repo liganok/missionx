@@ -5,11 +5,13 @@ import Home from './components/Home';
 import AddMission from './components/AddMission';
 import ToDoMissionList from './components/ToDoMissionList';
 import DoneMissionList from './components/DoneMissionList';
+import Navbar from './components/Navbar';
 
 export default (
   <Route component={App}>
     <Route path='/' component={Home} />
     <Route path='/todolist' component={ToDoMissionList} />
     <Route path='/donelist' component={DoneMissionList} />
+    <Route path='/navbar' component={Navbar} />
   </Route>
 );

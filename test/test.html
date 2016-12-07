@@ -1,35 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<aside className="lg-side">
+    <div className="inbox-head">
+        <h3>Inbox</h3>
+    </div>
+    <div className="inbox-body">
+        <div className="mail-option">
+            <div className="chk-all">
+                <input type="checkbox" className="mail-checkbox mail-group-checkbox"/>
+            </div>
 
-    <title>Bootstrap 3, from LayoutIt!</title>
+            <div className="btn-group">
+                <a data-original-title="Refresh" data-placement="top" data-toggle="dropdown" href="#" className="btn mini tooltips">
+                    <i className=" fa fa-refresh"></i>
+                </a>
+            </div>
+            <div className="btn-group hidden-phone">
+                <a data-toggle="dropdown" href="#" className="btn mini blue" aria-expanded="false">
+                    More
+                    <i className="fa fa-angle-down "></i>
+                </a>
+                <ul className="dropdown-menu">
+                    <li><a href="#"><i className="fa fa-pencil"></i> Mark as Read</a></li>
+                    <li><a href="#"><i className="fa fa-ban"></i> Spam</a></li>
+                    <li className="divider"></li>
+                    <li><a href="#"><i className="fa fa-trash-o"></i> Delete</a></li>
+                </ul>
+            </div>
+            <div className="btn-group">
+                <a data-toggle="dropdown" href="#" className="btn mini blue">
+                    Move to
+                    <i className="fa fa-angle-down "></i>
+                </a>
+                <ul className="dropdown-menu">
+                    <li><a href="#"><i className="fa fa-pencil"></i> Mark as Read</a></li>
+                    <li><a href="#"><i className="fa fa-ban"></i> Spam</a></li>
+                    <li className="divider"></li>
+                    <li><a href="#"><i className="fa fa-trash-o"></i> Delete</a></li>
+                </ul>
+            </div>
 
-    <meta name="description" content="Source code generated using layoutit.com">
-    <meta name="author" content="LayoutIt!">
+            <ul className="unstyled inbox-pagination">
+                <li><span>1-50 of 234</span></li>
+                <li>
+                    <a className="np-btn" href="#"><i className="fa fa-angle-left  pagination-left"></i></a>
+                </li>
+                <li>
+                    <a className="np-btn" href="#"><i className="fa fa-angle-right pagination-right"></i></a>
+                </li>
+            </ul>
+        </div>
+        <table className="table table-inbox table-hover">
+            <tbody>
+            <tr className="unread">
+                <td className="inbox-small-cells">
+                    <input type="checkbox" className="mail-checkbox"/>
+                </td>
+                <td className="inbox-small-cells"><i className="fa fa-star"></i></td>
+                <td className="view-message  dont-show">PHPclassName</td>
+                <td className="view-message ">Added a new className: Login className Fast Site</td>
+                <td className="view-message  inbox-small-cells"><i className="fa fa-paperclip"></i></td>
+                <td className="view-message  text-right">9:27 AM</td>
+            </tr>
+            <tr className="unread">
+                <td className="inbox-small-cells">
+                    <input type="checkbox" className="mail-checkbox"/>
+                </td>
+                <td className="inbox-small-cells"><i className="fa fa-star"></i></td>
+                <td className="view-message dont-show">Google Webmaster </td>
+                <td className="view-message">Improve the search presence of WebSite</td>
+                <td className="view-message inbox-small-cells"></td>
+                <td className="view-message text-right">March 15</td>
+            </tr>
 
-    <link rel="stylesheet" href="/css/main.css"/>
-
-  </head>
-  <body>
-    <div class="container">
-		<div class="row clearfix">
-			<div class="col-md-12 column">
-				<form role="form">
-					<div class="form-group">
-						 <label for="exampleInputPassword1">Mission</label><input type="text" class="form-control" id="exampleInputPassword1" />
-					</div>
-
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
-			</div>
-		</div>
-	</div>
-
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script>
-  </body>
-</html>
+            </tbody>
+        </table>
+    </div>
+</aside>
