@@ -30,18 +30,18 @@ class AddMission extends React.Component {
 
   render() {
     return (
-      <div className='container'>
+      <div className="container">
         <div className="row flipInX animated">
-          <div className="col-md-12">
+          <div className="col-sm-8">
             <div className="panel panel-default">
               <div className='panel-heading'>Add Mission</div>
               <div className="panel-body">
                 <div role="form" className="form-horizontal" >
-                  <div className="col-sm-10">
+                  <div>
                     <input type='text' className="form-control" ref='nameTextField' value={this.state.name}
                            onChange={AddMissionActions.updateName} autoFocus/>
                   </div>
-                  <div className="col-sm-2">
+                  <div>
                     <button type='submit' className='btn btn-primary btn-sm' onClick={this.handleSubmit.bind(this)}>   Add   </button>
                   </div>
                 </div>

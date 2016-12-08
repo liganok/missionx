@@ -38,7 +38,7 @@ class ToDoMissionList extends React.Component {
     return (
       <div className='container'>
         <div className="row flipInX animated">
-          <div className="col-md-12">
+          <div className="col-md-8">
             <div className="panel panel-default">
               <div className='panel-heading'>To Do</div>
               <div className='list-group'>
