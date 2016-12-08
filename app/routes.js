@@ -13,5 +13,7 @@ export default (
     <Route path='/todolist' component={ToDoMissionList} />
     <Route path='/donelist' component={DoneMissionList} />
     <Route path='/navbar' component={Navbar} />
+    <Route path='/tasks' component={Home} />
+    <Route path='/plans' component={AddMission} />
   </Route>
 );
