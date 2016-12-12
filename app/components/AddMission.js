@@ -36,7 +36,7 @@ class AddMission extends React.Component {
             <div className="form-group">
               <input type='text' className="form-control" ref='nameTextField' value={this.state.name}
                      onChange={AddMissionActions.updateName} autoFocus>
-                <button type='submit' className='btn btn-primary btn-sm' onClick={this.handleSubmit.bind(this)}> Add
+                <button type='submit' className='btn btn-default btn-sm' onClick={this.handleSubmit.bind(this)}> Add
                 </button>
               </input>
             </div>

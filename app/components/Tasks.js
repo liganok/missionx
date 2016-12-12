@@ -6,7 +6,7 @@ import AddMission from './AddMission';
 class Tasks extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {subcom:<ToDoMissionList/>};
+    this.state = {subCom:<ToDoMissionList/>};
     this.onChange = this.onChange.bind(this);
   }
 
@@ -20,24 +20,27 @@ class Tasks extends React.Component {
     this.setState(state);
   }
 
-  handleToDo(event){
-    this.state.subcom = <ToDoMissionList/>;
-    alert(this.state.subcom);
+  handleToDo(){
+    this.setState({subCom:<ToDoMissionList/>});
   }
 
-  handleDone(event){
-    this.state.type = <DoneMissionList/>;
-    alert(this.state.subcom);
+  handleDone(){
+    this.setState({subCom:<DoneMissionList/>});
   }
 
   render() {
     return (
       <div>
-        <div className="btn-group" role="group">
-          <button type="button" className="btn btn-default" aria-label="..." onClick={this.state.subcom = <ToDoMissionList/>}>To Do</button>
-          <button type="button" className="btn btn-default" aria-label="..." onClick={this.state.subcom = <DoneMissionList/>}>Done</button>
+        <AddMission/>
+        <div className="col-sm-offset-9">
+          <div className="btn-group" role="group">
+            <button type="button" className="btn btn-default" aria-label="..." onClick={this.handleToDo.bind(this)}>To Do</button>
+            <button type="button" className="btn btn-default" aria-label="..." onClick={this.handleDone.bind(this)}>Done</button>
+          </div>
         </div>
-        {this.state.subcom}
+        <div>
+          {this.state.subCom}
+        </div>
       </div>
     );
   }

@@ -10,7 +10,7 @@ import Tasks from './components/Tasks';
 
 export default (
   <Route component={App}>
-    <Route path='/' component={Home} />
+    <Route path='/' component={Tasks} />
     <Route path='/todolist' component={ToDoMissionList} />
     <Route path='/donelist' component={DoneMissionList} />
     <Route path='/navbar' component={Navbar} />

@@ -40,7 +40,6 @@ class DoneMissionList extends React.Component {
         <div className="row flipInX animated">
           <div className="col-md-8">
             <div className="panel panel-default">
-              <div className='panel-heading'>Done</div>
               <div className='list-group'>
                 {missionList}
               </div>
