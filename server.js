@@ -37,11 +37,14 @@ app.use(express.static(path.join(__dirname, 'public')));
  */
 app.post('/api/missions', function (req, res, next) {
   var name = req.body.name;
-
+  var time = new Date().getTime();
   try {
     var mission = new Mission({
       name: name,
+      createTime: time,
+      updateTime: time,
     });
+    console.log(new Date().getTime());
     mission.save(function (err) {
       if(err) return next(err);
       res.send({message:name + 'has been added successfully!'});
@@ -55,11 +58,12 @@ app.post('/api/missions', function (req, res, next) {
 app.put('/api/missions', function (req, res, next) {
   var missionId = req.body.missionId;
   var isDone = req.body.isDone;
+  var time = new Date().getTime();
   console.log(missionId + isDone);
   if(missionId){
     console.log(missionId + isDone + '2');
     try {
-      Mission.update({'_id':missionId},{ $set: {'isDone':isDone}},function (err) {
+      Mission.update({'_id':missionId},{ $set: {'isDone':isDone,updateTime:time}},function (err) {
         console.log(missionId + isDone + '3');
         if(err) return next(err);
         res.send({message:missionId + 'has been updated successfully!'});

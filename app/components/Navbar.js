@@ -24,7 +24,7 @@ class Navbar extends React.Component {
   render() {
     return (
       <div>
-        <div className="user-head">
+        {/* <div className="user-head">
           <a className="inbox-avatar" href="javascript:;">
           </a>
           <div className="user-name">
@@ -32,7 +32,7 @@ class Navbar extends React.Component {
           <a className="mail-dropdown pull-right" href="javascript:;">
             <i className="fa fa-chevron-down"></i>
           </a>
-        </div>
+        </div>*/}
         <ul className="inbox-nav inbox-divider">
           <li className="active">
             <a href="/tasks"><i className="fa fa-inbox"></i> Tasks <span
@@ -57,7 +57,6 @@ class Navbar extends React.Component {
           <li><a href="#"> <i className=" fa fa-sign-blank text-primary "></i> Office </a>
           </li>
         </ul>
-
       </div>
     );
   }
