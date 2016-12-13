@@ -34,7 +34,7 @@ class Navbar extends React.Component {
           </a>
         </div>*/}
         <ul className="inbox-nav inbox-divider">
-          <li className="active">
+          <li>
             <a href="/tasks"><i className="fa fa-inbox"></i> Tasks <span
               className="label label-danger pull-right">2</span></a>
 

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var missionSchema = new mongoose.Schema({
   name: String,
-  parentId: String,
+  parentId: mongoose.Schema.Types.ObjectId,
   createTime: Date,
   updateTime: Date,
   dueTime: Date,
