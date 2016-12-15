@@ -1,4 +1,6 @@
 import React from 'react';
+import AddMission from './AddMission';
+import MissionList from './MissionList';
 
 class Plans extends React.Component {
   constructor(props) {
@@ -21,10 +23,11 @@ class Plans extends React.Component {
   }
 
   getMissions() {
+    var para={type:this.props.type.trim()};
     $.ajax({
       type: 'GET',
       url: '/api/missions',
-      data:{type:'TODO',isPlan:true}
+      data:para
     }).done((data)=> {
       this.setState({missions:data});
     }).fail((jqxhr)=> {
@@ -45,16 +48,9 @@ class Plans extends React.Component {
     });
 
     return (
-      <div className='container'>
-        <div className="row flipInX">
-          <div className="col-md-8">
-            <div className="panel panel-default">
-              <div className='list-group'>
-                {missionList}
-              </div>
-            </div>
-          </div>
-        </div>
+      <div>
+        <AddMission type="PLAN"/>
+        <MissionList type="PLAN"/>
       </div>
     );
   }

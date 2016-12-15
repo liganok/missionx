@@ -9,11 +9,11 @@ class AddMissionActions {
     );
   }
 
-  addMission(name) {
+  addMission(para) {
     $.ajax({
       type: 'POST',
       url: '/api/missions',
-      data: {name:name}
+      data: para
     }).done((data)=>{
       this.actions.addMissionSuccess(data.message);
     }).fail((jqxhr)=>{

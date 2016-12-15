@@ -38,13 +38,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.post('/api/missions', function (req, res, next) {
   var name = req.body.name;
   var time = new Date().getTime();
+  console.log(req.body.type);
   try {
     var mission = new Mission({
       name: name,
       createTime: time,
       updateTime: time,
     });
-    console.log(new Date().getTime());
     mission.save(function (err) {
       if(err) return next(err);
       res.send({message:name + 'has been added successfully!'});

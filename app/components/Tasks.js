@@ -31,7 +31,7 @@ class Tasks extends React.Component {
   render() {
     return (
       <div>
-        <AddMission/>
+        <AddMission type="TASK"/>
         <div className="col-sm-offset-9">
           <div className="btn-group" role="group">
             <button type="button" className="btn btn-default" aria-label="..." onClick={this.handleToDo.bind(this)}>To Do</button>
