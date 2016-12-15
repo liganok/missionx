@@ -76,13 +76,8 @@ app.put('/api/missions', function (req, res, next) {
 });
 
 app.get('/api/missions', function(req, res, next) {
-  var isDone;
-  console.log(req.query.isDone);
-  if(req.query.isDone == false){
-    isDone = false;
-  }else{
-    isDone = true;
-  }
+  var isDone=req.query.isDone;
+  if (isDone == null){isDone=false}
   Mission
     .find({'isDone':isDone})
     .exec(function(err, missions) {

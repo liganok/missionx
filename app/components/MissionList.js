@@ -12,7 +12,6 @@ class MissionList extends React.Component {
   componentDidMount() {
     MissionListStore.listen(this.onChange);
     var para = this.props.para;
-    alert(para.isDone);
     MissionListActions.getMissions(para);
   }
 

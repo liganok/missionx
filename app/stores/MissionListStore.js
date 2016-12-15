@@ -1,11 +1,12 @@
 import alt from '../alt';
 import MissionListActions from '../actions/MissionListActions';
-import DoneMissionListActions from '../actions/DoneMissionListActions';
+import TaskActions from '../actions/TaskActions';
 import AddMissionActions from '../actions/AddMissionActions';
 
 class MissionListStore {
   constructor() {
     this.bindActions(MissionListActions);
+    this.bindActions(TaskActions);
     this.bindAction(AddMissionActions.addMissionSuccess, this.handleAddMissionSuccess);
     this.missions = [];
     this.isDone;
@@ -41,6 +42,16 @@ class MissionListStore {
 
   handleAddMissionSuccess(data){
     MissionListActions.getMissions();
+  }
+
+  onGetToDo(event){
+    var para = {type:"TASK",isDone:false};
+    MissionListActions.getMissions(para);
+  }
+
+  onGetDone(event){
+    var para = {type:"TASK",isDone:true};
+    MissionListActions.getMissions(para);
   }
 
 }

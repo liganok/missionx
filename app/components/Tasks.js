@@ -26,7 +26,7 @@ class Tasks extends React.Component {
   }
 
   render() {
-    console.log("test+"+this.state.para.type+"isdone"+this.state.para.isDone);
+    //console.log("test+"+this.state.para.type+"isdone"+this.state.para.isDone);
     return (
       <div>
         <AddMission para={{type:"TASK"}}/>
@@ -37,7 +37,7 @@ class Tasks extends React.Component {
           </div>
         </div>
         <div>
-          <MissionList para={this.state.para}/>
+          <MissionList para={{type:"TASK",isDone:false}}/>
         </div>
       </div>
     );

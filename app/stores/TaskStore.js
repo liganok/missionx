@@ -7,14 +7,6 @@ class TaskStore {
     this.para = {type:"TASK",isDone:false};
   }
 
-  onGetToDo(event){
-
-    this.para = {type:"TASK",isDone:false};
-  }
-
-  onGetDone(event){
-    this.para = {type:"TASK",isDone:true};
-  }
 
 }
 
