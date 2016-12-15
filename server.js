@@ -77,13 +77,12 @@ app.put('/api/missions', function (req, res, next) {
 
 app.get('/api/missions', function(req, res, next) {
   var isDone;
-  console.log(req.query.type);
-  if(req.query.type == 'TODO'){
+  console.log(req.query.isDone);
+  if(req.query.isDone == false){
     isDone = false;
   }else{
     isDone = true;
   }
-  console.log(isDone);
   Mission
     .find({'isDone':isDone})
     .exec(function(err, missions) {

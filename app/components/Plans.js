@@ -49,8 +49,8 @@ class Plans extends React.Component {
 
     return (
       <div>
-        <AddMission type="PLAN"/>
-        <MissionList type="PLAN"/>
+        <AddMission para={{type:"PLAN"}}/>
+        <MissionList para={{type:"PLAN"}}/>
       </div>
     );
   }

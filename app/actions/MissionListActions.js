@@ -11,11 +11,11 @@ class MissionListActions {
     );
   }
 
-  getMissions(type) {
+  getMissions(para) {
     $.ajax({
       type: 'GET',
       url: '/api/missions',
-      data:{type:'TODO'}
+      data:para
     }).done((data)=> {
       this.actions.getMissionsSuccess(data);
     }).fail((jqxhr)=> {
