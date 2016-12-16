@@ -1,23 +1,23 @@
 import React from 'react';
-import {Link} from 'react-router';
-import MissionListStore from '../stores/MissionListStore';
-import MissionListActions from '../actions/MissionListActions';
+import MissionDetailStore from '../stores/MissionDetailStore';
+import MissionDetailActions from '../actions/MissionDetailActions';
+import AddMission from './AddMission';
 
-class MissionList extends React.Component {
+class MissionDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state = MissionListStore.getState();
+    this.state = MissionDetailStore.getState();
     this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-    MissionListStore.listen(this.onChange);
-    var para = this.props.para;
-    MissionListActions.getMissions(para);
+    MissionDetailStore.listen(this.onChange);
+    var para = this.props.params;
+    MissionDetailActions.getMissions(para);
   }
 
   componentWillUnmount() {
-    MissionListStore.unlisten(this.onChange);
+    MissionDetailStore.unlisten(this.onChange);
   }
 
   onChange(state) {
@@ -26,13 +26,12 @@ class MissionList extends React.Component {
 
 
   render() {
-    let missionList = this.state.missions.map((mission, index) => {
+    let MissionDetail = this.state.missions.map((mission, index) => {
       return (
         <div key={mission._id} id={mission._id} className='list-group-item animated fadeIn'>
           <h4 className='media-heading'>
             <input type='checkbox' checked={mission.isDone}
-                   onChange={MissionListActions.changeStatus}></input>
-            <Link to={'plan/' + mission._id}>   {mission.name}</Link>
+                   onChange={MissionDetailActions.changeStatus}>   {mission.name}</input>
           </h4>
         </div>
       );
@@ -40,11 +39,12 @@ class MissionList extends React.Component {
 
     return (
       <div className='container'>
+        <AddMission para={{type:"TASK",parentId:this.props.params.id}}/>
         <div className="row flipInX">
           <div className="col-md-8">
             <div className="panel panel-default">
               <div className='list-group'>
-                {missionList}
+                {MissionDetail}
               </div>
             </div>
           </div>
@@ -54,6 +54,6 @@ class MissionList extends React.Component {
   }
 }
 
-export default MissionList;
+export default MissionDetail;
 
 

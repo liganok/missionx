@@ -38,20 +38,36 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.post('/api/missions', function (req, res, next) {
   var name = req.body.name;
   var time = new Date().getTime();
+  var _id = mongoose.Types.ObjectId();
+  var parentId = req.body.parentId;
+  console.log(parentId);
+
   console.log(req.body.type);
+
+  if (req.body.type == 'PLAN') {
+    var parentId = _id;
+  }
+  if (req.body.type == 'TASK') {
+    if (req.body.parentId) {
+      parentId = req.body.parentId
+    }
+  }
+
   try {
     var mission = new Mission({
+      _id: _id,
+      parentId: parentId,
       name: name,
       createTime: time,
-      updateTime: time,
+      updateTime: time
     });
     mission.save(function (err) {
-      if(err) return next(err);
-      res.send({message:name + 'has been added successfully!'});
+      if (err) return next(err);
+      res.send({message: name + 'has been added successfully!'});
     });
 
-  }catch(e) {
-    res.status(404).send({ message: name + ' is not saved.' });
+  } catch (e) {
+    res.status(404).send({message: name + ' is not saved.'});
   }
 });
 
@@ -60,30 +76,38 @@ app.put('/api/missions', function (req, res, next) {
   var isDone = req.body.isDone;
   var time = new Date().getTime();
   console.log(missionId + isDone);
-  if(missionId){
+  if (missionId) {
     console.log(missionId + isDone + '2');
     try {
-      Mission.update({'_id':missionId},{ $set: {'isDone':isDone,updateTime:time}},function (err) {
+      Mission.update({'_id': missionId}, {$set: {'isDone': isDone, updateTime: time}}, function (err) {
         console.log(missionId + isDone + '3');
-        if(err) return next(err);
-        res.send({message:missionId + 'has been updated successfully!'});
+        if (err) return next(err);
+        res.send({message: missionId + 'has been updated successfully!'});
       });
 
-    }catch(e) {
-      res.status(404).send({ message: missionId + ' is not saved.' });
+    } catch (e) {
+      res.status(404).send({message: missionId + ' is not saved.'});
     }
   }
 });
 
-app.get('/api/missions', function(req, res, next) {
-  var isDone=req.query.isDone;
-  if (isDone == null){isDone=false}
+app.get('/api/missions', function (req, res, next) {
+  var isDone = req.query.isDone;
+  console.log(req.query.id);
+  if (isDone == null) {
+    isDone = false
+  }
+  if (req.query.id) {
+    var para = {'isDone': isDone, "parentId": req.query.id, "_id":{$ne:req.query.id}};
+  } else {
+    para = {'isDone': isDone};
+  }
   Mission
-    .find({'isDone':isDone})
-    .exec(function(err, missions) {
+    .find(para)
+    .exec(function (err, missions) {
       if (err) return next(err);
       res.send(missions);
-    });
+});
 });
 
 app.use(function (req, res) {

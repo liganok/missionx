@@ -23,7 +23,8 @@ class AddMission extends React.Component {
 
   handleSubmit(event) {
     var para = {name:this.state.name.trim(),
-                type:this.props.para.type};
+                type:this.props.para.type,
+                parentId:this.props.para.parentId};
     if (para.name) {
       AddMissionActions.addMission(para);
     }
