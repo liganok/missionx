@@ -38,11 +38,36 @@ class MissionDetail extends React.Component {
     });
 
     return (
-      <div className='container'>
-        <AddMission para={{type:"TASK",parentId:this.props.params.id}}/>
-        <div className="row flipInX">
-          <div className="col-md-8">
-            <div className="panel panel-default">
+      <div className="container col-md-10 col-md-offset-1">
+        <a href={"../detail/"+this.props.params.id}>{this.props.params.id} ></a>
+        <div className="pull-right">
+          <button type="button" className="btn-link">Edit</button>
+          <button type="button" className="btn-link">Delete</button>
+        </div>
+        <ul className="nav nav-list nav-divider">
+          <li className="nav-divider"></li>
+        </ul>
+        <blockquote>
+          <input type="checkbox"/>
+          Just do it parent
+          <span className="badge pull-right">11/20</span>
+          <small>Description for test</small>
+        </blockquote>
+
+        <div>
+          <small>Sub items</small>
+          <div className="well">
+            <div className="input-group" style={{marginBottom:10}}>
+              <input type="text" className="form-control" placeholder="Add sub items"/>
+                    <span className="input-group-btn">
+                        <button className="btn btn-default" type="button">Add</button>
+                    </span>
+            </div>
+            <div className="">
+              <input type="checkbox" checked="true"/> <span><small>To Do</small></span>
+              <input type="checkbox"/> <span><small>Done</small></span>
+            </div>
+            <div style={{marginTop: 2}}>
               <div className='list-group'>
                 {MissionDetail}
               </div>

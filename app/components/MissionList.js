@@ -32,23 +32,15 @@ class MissionList extends React.Component {
           <h4 className='media-heading'>
             <input type='checkbox' checked={mission.isDone}
                    onChange={MissionListActions.changeStatus}></input>
-            <Link to={'plan/' + mission._id}>   {mission.name}</Link>
+            <Link to={'detail/' + mission._id}>   {mission.name}</Link>
           </h4>
         </div>
       );
     });
 
     return (
-      <div className='container'>
-        <div className="row flipInX">
-          <div className="col-md-8">
-            <div className="panel panel-default">
-              <div className='list-group'>
-                {missionList}
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className='list-group'>
+        {missionList}
       </div>
     );
   }

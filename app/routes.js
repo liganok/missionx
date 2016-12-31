@@ -19,6 +19,6 @@ export default (
     <Route path='/navbar' component={Navbar}/>
     <Route path='/tasks' component={Tasks}/>
     <Route path='/plans' component={Plans}/>
-    <Route path='/plan/:id' component={MissionDetail}/>
+    <Route path='/detail/:id' component={MissionDetail}/>
   </Route>
 );

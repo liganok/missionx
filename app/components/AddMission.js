@@ -22,9 +22,11 @@ class AddMission extends React.Component {
   }
 
   handleSubmit(event) {
-    var para = {name:this.state.name.trim(),
-                type:this.props.para.type,
-                parentId:this.props.para.parentId};
+    var para = {
+      name: this.state.name.trim(),
+      type: this.props.para.type,
+      parentId: this.props.para.parentId
+    };
     if (para.name) {
       AddMissionActions.addMission(para);
     }
@@ -32,17 +34,13 @@ class AddMission extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="col-sm-8">
-          <div role="form" className="row clearfix animated">
-            <div className="form-group">
-              <input type='text' className="form-control" ref='nameTextField' value={this.state.name}
-                     onChange={AddMissionActions.updateName} autoFocus>
-                <button type='submit' className='btn btn-default btn-sm' onClick={this.handleSubmit.bind(this)}> Add
-                </button>
-              </input>
-            </div>
-          </div>
+      <div className="container col-md-10 col-md-offset-1">
+        <div className="input-group">
+          <input type="text" className="form-control" ref='nameTextField' value={this.state.name}
+                 onChange={AddMissionActions.updateName} autoFocus/>
+          <span className="input-group-btn">
+            <button className="btn btn-default" type="button" onClick={this.handleSubmit.bind(this)}>Add</button>
+          </span>
         </div>
       </div>
     );

@@ -30,13 +30,13 @@ class Tasks extends React.Component {
     return (
       <div>
         <AddMission para={{type:"TASK"}}/>
-        <div className="col-sm-offset-9">
-          <div className="btn-group" role="group">
-            <button type="button" className="btn btn-default" aria-label="..." onClick={TaskActions.getToDo}>To Do</button>
-            <button type="button" className="btn btn-default" aria-label="..." onClick={TaskActions.getDone}>Done</button>
+        <div className="col-md-10 col-md-offset-1 pull-left">
+          <div className="btn-group" role="group" style={{marginTop:10}}>
+            <button type="button" className="btn btn-default btn-xs"  onClick={TaskActions.getToDo}>To Do</button>
+            <button type="button" className="btn btn-default btn-xs"  onClick={TaskActions.getDone}>Done</button>
           </div>
         </div>
-        <div>
+        <div className="col-md-10 col-md-offset-1">
           <MissionList para={{type:"TASK",isDone:false}}/>
         </div>
       </div>

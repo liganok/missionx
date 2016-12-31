@@ -23,41 +23,31 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <div>
-        {/* <div className="user-head">
-          <a className="inbox-avatar" href="javascript:;">
-          </a>
-          <div className="user-name">
+      <nav className="navbar navbar-default" role="navigation">
+        <div className="container-fluid col-md-10 col-md-offset-1">
+          <div className="navbar-header">
+            <a className="navbar-brand" href="#">
+              <span>MissionX</span>
+            </a>
           </div>
-          <a className="mail-dropdown pull-right" href="javascript:;">
-            <i className="fa fa-chevron-down"></i>
-          </a>
-        </div>*/}
-        <ul className="inbox-nav inbox-divider">
-          <li>
-            <a href="/tasks"><i className="fa fa-inbox"></i> Tasks <span
-              className="label label-danger pull-right">2</span></a>
-
-          </li>
-          <li>
-            <a href="/plans"><i className="fa fa-envelope-o"></i> Plans</a>
-          </li>
-          <li>
-            <a href="#"><i className=" fa fa-trash-o"></i> Trash</a>
-          </li>
-        </ul>
-        <ul className="nav nav-pills nav-stacked labels-info inbox-divider">
-          <li><h4>Labels</h4></li>
-          <li><a href="#"> <i className=" fa fa-sign-blank text-danger"></i> Work </a></li>
-          <li><a href="#"> <i className=" fa fa-sign-blank text-success"></i> Design </a></li>
-          <li><a href="#"> <i className=" fa fa-sign-blank text-info "></i> Family </a>
-          </li>
-          <li><a href="#"> <i className=" fa fa-sign-blank text-warning "></i> Friends </a>
-          </li>
-          <li><a href="#"> <i className=" fa fa-sign-blank text-primary "></i> Office </a>
-          </li>
-        </ul>
-      </div>
+          <div className="collapse navbar-collapse">
+            <ul className="nav navbar-nav">
+              <li className=""><a href="Inbox">Inbox</a></li>
+              <li className=""><a href="Tasks">Tasks</a></li>
+              <li className=""><a href="Plans">Plans</a></li>
+              <li className=""><a href="Trash">Trash</a></li>
+            </ul>
+            <form className="navbar-form navbar-left" role="search">
+              <div className="form-group">
+                <input type="text" className="form-control" placeholder="Search"/>
+              </div>
+            </form>
+            <ul className="nav navbar-nav navbar-right">
+              <li className=""><a href="#">liganok86</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     );
   }
 }
