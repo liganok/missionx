@@ -1,20 +1,27 @@
 import alt from '../alt';
 import MissionDetailActions from '../actions/MissionDetailActions';
-import TaskActions from '../actions/TaskActions';
 import AddMissionActions from '../actions/AddMissionActions';
 
 class MissionDetailStore {
   constructor() {
     this.bindActions(MissionDetailActions);
-    this.bindActions(TaskActions);
-    this.bindAction(AddMissionActions.addMissionSuccess, this.handleAddMissionSuccess);
-    this.missions = [];
+    //this.bindAction(AddMissionActions.addMissionSuccess, this.handleAddMissionSuccess);
+    this.subItems=[];
     this.isDone;
-    this.missionId = '';
+    this.mission={};
+    this.parent={};
   }
 
-  onGetMissionsSuccess(data) {
-    this.missions = data;
+  onGetParentSuccess(data) {
+    this.parent = data;
+  }
+
+  onGetMissionSuccess(data) {
+    this.mission = data[0];
+  }
+
+  onGetSubItemsSuccess(data) {
+    this.subItems = data;
   }
 
   onChangeStatus(event) {
@@ -30,28 +37,6 @@ class MissionDetailStore {
         this.missions.splice(i, 1);
       }
     }
-  }
-
-  onUpdateMissionsFail(errorMessage) {
-    alert(errorMessage);
-  }
-
-  handleUpdateMissionsSuccess(data){
-    MissionDetailActions.getMissions();
-  }
-
-  handleAddMissionSuccess(data){
-    MissionDetailActions.getMissions();
-  }
-
-  onGetToDo(event){
-    var para = {type:"TASK",isDone:false};
-    MissionDetailActions.getMissions(para);
-  }
-
-  onGetDone(event){
-    var para = {type:"TASK",isDone:true};
-    MissionDetailActions.getMissions(para);
   }
 
 }

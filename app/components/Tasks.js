@@ -36,7 +36,7 @@ class Tasks extends React.Component {
           <span><small> Done</small></span>
         </div>
         <div style={{marginTop: 2}}>
-          <MissionList para={{type: "TASK", isDone:false}}/>
+          <MissionList para={{type: "TASK", isDone:{$in:[false]}}}/>
         </div>
       </div>
     );

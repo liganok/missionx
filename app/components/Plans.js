@@ -1,57 +1,54 @@
 import React from 'react';
 import AddMission from './AddMission';
+import {Link} from 'react-router';
+import PlansStore from '../stores/PlansStore';
+import PlansActions from '../actions/PlansActions';
+
 import MissionList from './MissionList';
 
 class Plans extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      missions:[]
-    };
+    this.state = PlansStore.getState();
     this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-    this.getMissions();
+    PlansStore.listen(this.onChange);
+    PlansActions.getPlans({isDone: false});
   }
 
   componentWillUnmount() {
+    PlansStore.unlisten(this.onChange);
   }
 
   onChange(state) {
     this.setState(state);
   }
 
-  getMissions() {
-    var para={type:this.props.type.trim()};
-    $.ajax({
-      type: 'GET',
-      url: '/api/missions',
-      data:para
-    }).done((data)=> {
-      this.setState({missions:data});
-    }).fail((jqxhr)=> {
-      this.actions.getMissionsFail(jqxhr.responseJSON.message);
-    });
-  }
-
 
   render() {
-    let missionList = this.state.missions.map((mission, index) => {
+    let plans = this.state.plans.map((mission, index) => {
       return (
-        <div id={mission._id} className='list-group-item animated fadeIn'>
-          <h4 className='media-heading'>
-            <input type='checkbox' checked={mission.isDone}>    {mission.name}</input>
-          </h4>
-        </div>
+        <li id={mission._id} className='list-group-item animated fadeIn'>
+          <input type="checkbox" checked={mission.isDone} onChange={PlansActions.changeStatus}/>
+          <Link to={'detail/' + mission._id}><span className="H5" style={{marginLeft: 4}}>{mission.name}</span></Link>
+          <span className="badge">5/14</span>
+        </li>
       );
     });
 
     return (
       <div>
-        <AddMission para={{type:"PLAN"}}/>
-        <div style={{marginTop:10}}>
-          <MissionList  para={{type:"PLAN"}}/>
+        <AddMission para={{type: "PLAN"}}/>
+          <div className="" style={{marginTop: 5}}>
+            <input type="checkbox" checked={this.state.selection.todo} onChange={PlansActions.selectToDo}/>
+            <span style={{marginRight: 5}}><small> To Do</small></span>
+            <input type="checkbox" checked={this.state.selection.done} onChange={PlansActions.selectDone}/>
+            <span><small> Done</small></span>
+          <ul className="list-group">
+            {plans}
+          </ul>
         </div>
       </div>
     );

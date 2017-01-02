@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 import MissionDetailStore from '../stores/MissionDetailStore';
 import MissionDetailActions from '../actions/MissionDetailActions';
 import AddMission from './AddMission';
@@ -13,7 +14,9 @@ class MissionDetail extends React.Component {
   componentDidMount() {
     MissionDetailStore.listen(this.onChange);
     var para = this.props.params;
-    MissionDetailActions.getMissions(para);
+    MissionDetailActions.getMission(para);
+    MissionDetailActions.getSubItems(para);
+
   }
 
   componentWillUnmount() {
@@ -26,12 +29,13 @@ class MissionDetail extends React.Component {
 
 
   render() {
-    let MissionDetail = this.state.missions.map((mission, index) => {
+    let MissionDetail = this.state.subItems.map((mission, index) => {
       return (
         <div key={mission._id} id={mission._id} className='list-group-item animated fadeIn'>
           <h4 className='media-heading'>
             <input type='checkbox' checked={mission.isDone}
-                   onChange={MissionDetailActions.changeStatus}>   {mission.name}</input>
+                   onChange={MissionDetailActions.changeStatus}/>
+            <a href={"../detail/" + mission._id}><span className="H5" style={{marginLeft: 4}}>{mission.name}</span></a>
           </h4>
         </div>
       );
@@ -49,9 +53,9 @@ class MissionDetail extends React.Component {
         </ul>
         <blockquote>
           <input type="checkbox"/>
-          Just do it parent
+          {this.state.mission.name}
           <span className="badge pull-right">11/20</span>
-          <small>Description for test</small>
+          <small> {this.state.mission.name}</small>
         </blockquote>
 
         <div>

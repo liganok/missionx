@@ -3,23 +3,51 @@ import alt from '../alt';
 class MissionDetailActions {
   constructor() {
     this.generateActions(
-      'getMissionsSuccess',
-      'getMissionsFail',
-      'updateMissionsSuccess',
-      'updateMissionsFail',
+      'getParentSuccess',
+      'getParentFail',
+      'getMissionSuccess',
+      'getMissionFail',
+      'getSubItemsSuccess',
+      'getSubItemsFail',
+      'updateMissionSuccess',
+      'updateMissionFail',
       'changeStatus'
     );
   }
 
-  getMissions(para) {
+  getParent(para) {
+    $.ajax({
+      type: 'GET',
+      url: '/api/mission',
+      data:para
+    }).done((data)=> {
+      this.actions.getParentSuccess(data);
+    }).fail((jqxhr)=> {
+      this.actions.getParentFail(jqxhr.responseJSON.message);
+    });
+  }
+
+  getMission(para) {
+    $.ajax({
+      type: 'GET',
+      url: '/api/mission',
+      data:para
+    }).done((data)=> {
+      this.actions.getMissionSuccess(data);
+    }).fail((jqxhr)=> {
+      this.actions.getMissionFail(jqxhr.responseJSON.message);
+    });
+  }
+
+  getSubItems(para) {
     $.ajax({
       type: 'GET',
       url: '/api/missions',
       data:para
     }).done((data)=> {
-      this.actions.getMissionsSuccess(data);
+      this.actions.getSubItemsSuccess(data);
     }).fail((jqxhr)=> {
-      this.actions.getMissionsFail(jqxhr.responseJSON.message);
+      this.actions.getSubItemsFail(jqxhr.responseJSON.message);
     });
   }
 
