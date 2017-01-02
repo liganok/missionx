@@ -5,8 +5,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-          <Navbar/>
+        <Navbar/>
+        <div className="container col-md-10 col-md-offset-1">
           {this.props.children}
+        </div>
       </div>
     );
   }

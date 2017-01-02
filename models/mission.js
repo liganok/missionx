@@ -8,6 +8,7 @@ var missionSchema = new mongoose.Schema({
   dueTime: Date,
   description: String,
   tags: {type:String},
+  status: {type:String, default:'DRAFT'}, //[draft,active,deleted]
   isDone: { type: Boolean, default: false }
 });
 

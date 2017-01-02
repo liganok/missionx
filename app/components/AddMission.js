@@ -34,7 +34,7 @@ class AddMission extends React.Component {
 
   render() {
     return (
-      <div className="container col-md-10 col-md-offset-1">
+      <div>
         <div className="input-group">
           <input type="text" className="form-control" ref='nameTextField' value={this.state.name}
                  onChange={AddMissionActions.updateName} autoFocus/>

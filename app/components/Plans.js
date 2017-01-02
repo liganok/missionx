@@ -50,7 +50,7 @@ class Plans extends React.Component {
     return (
       <div>
         <AddMission para={{type:"PLAN"}}/>
-        <div className="col-md-10 col-md-offset-1" style={{marginTop:10}}>
+        <div style={{marginTop:10}}>
           <MissionList  para={{type:"PLAN"}}/>
         </div>
       </div>

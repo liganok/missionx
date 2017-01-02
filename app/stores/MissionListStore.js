@@ -44,13 +44,62 @@ class MissionListStore {
     MissionListActions.getMissions();
   }
 
-  onGetToDo(event){
-    var para = {type:"TASK",isDone:false};
+  onSelectToDo(event){
+    var toDoCheck = event.target.parentNode.childNodes[0].checked;
+    var doneCheck = event.target.parentNode.childNodes[2].checked;
+    var isDone;
+
+    if(toDoCheck && !doneCheck){
+      isDone = [false,false];
+    }
+
+    if(toDoCheck && doneCheck){
+      isDone = [false,true];
+    }
+
+    if(!toDoCheck && doneCheck){
+      isDone = [true,true];
+    }
+
+    if(!toDoCheck && !doneCheck){
+      isDone = null;
+    }
+    var status;
+    if(isDone){
+      status = {$in:isDone}
+    }
+
+    var para = {type:"TASK",isDone:status};
     MissionListActions.getMissions(para);
   }
 
-  onGetDone(event){
-    var para = {type:"TASK",isDone:true};
+  onSelectDone(event){
+    var toDoCheck = event.target.parentNode.childNodes[0].checked;
+    var doneCheck = event.target.parentNode.childNodes[2].checked;
+    var isDone;
+
+    if(toDoCheck && !doneCheck){
+      isDone = [false,false];
+    }
+
+    if(toDoCheck && doneCheck){
+      isDone = [false,true];
+    }
+
+    if(!toDoCheck && doneCheck){
+      isDone = [true,true];
+    }
+
+    if(!toDoCheck && !doneCheck){
+      isDone = null;
+    }
+
+    var status;
+    if(isDone){
+      status = {$in:isDone}
+    }
+
+    var para = {type:"TASK",isDone:status};
     MissionListActions.getMissions(para);
   }
 

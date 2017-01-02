@@ -1,5 +1,4 @@
 import React from 'react';
-import ToDoMissionList from './ToDoMissionList';
 import MissionList from './MissionList';
 import TaskStore from '../stores/TaskStore';
 import TaskActions from '../actions/TaskActions';
@@ -29,15 +28,15 @@ class Tasks extends React.Component {
     //console.log("test+"+this.state.para.type+"isdone"+this.state.para.isDone);
     return (
       <div>
-        <AddMission para={{type:"TASK"}}/>
-        <div className="col-md-10 col-md-offset-1 pull-left">
-          <div className="btn-group" role="group" style={{marginTop:10}}>
-            <button type="button" className="btn btn-default btn-xs"  onClick={TaskActions.getToDo}>To Do</button>
-            <button type="button" className="btn btn-default btn-xs"  onClick={TaskActions.getDone}>Done</button>
-          </div>
+        <AddMission para={{type: "TASK"}}/>
+        <div className="" style={{marginTop: 5}}>
+          <input type="checkbox" checked={this.state.selection.todo} onChange={TaskActions.selectToDo}/>
+          <span style={{marginRight: 5}}><small> To Do</small></span>
+          <input type="checkbox" checked={this.state.selection.done} onChange={TaskActions.selectDone}/>
+          <span><small> Done</small></span>
         </div>
-        <div className="col-md-10 col-md-offset-1">
-          <MissionList para={{type:"TASK",isDone:false}}/>
+        <div style={{marginTop: 2}}>
+          <MissionList para={{type: "TASK", isDone:false}}/>
         </div>
       </div>
     );

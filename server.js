@@ -92,7 +92,8 @@ app.put('/api/missions', function (req, res, next) {
 });
 
 app.get('/api/missions', function (req, res, next) {
-  var isDone = req.query.isDone;
+
+/*  var isDone = req.query.isDone;
   console.log(req.query.id);
   if (isDone == null) {
     isDone = false
@@ -100,15 +101,67 @@ app.get('/api/missions', function (req, res, next) {
   if (req.query.id) {
     var para = {'isDone': isDone, "parentId": req.query.id, "_id":{$ne:req.query.id}};
   } else {
-    para = {'isDone': isDone};
+    if(isDone){
+      para = {'isDone': {"$in":req.query.isDone}};
+    }else {
+      para = {'ID': 1};
+    }
   }
   Mission
     .find(para)
     .exec(function (err, missions) {
       if (err) return next(err);
       res.send(missions);
+});*/
+
+  var p = req.query;
+
+  if(p.id){
+    var para = {'isDone': p.isDone , "parentId": p.id};
+    Mission
+      .find(para)
+      .exec(function (err, missions) {
+        if (err) return next(err);
+        res.send(missions);
+      });
+  }else{
+    if(p.type == 'TASK'){
+      console.log(p.isDone);
+      Mission
+        .find({})
+        .exec(function (err, missions_tmp) {
+          if (err) return next(err);
+          var para = {'isDone': p.isDone,'_id':{"$nin":missions_tmp.parentId}};
+          Mission
+            .find(para)
+            .exec(function (err, missions) {
+              if (err) return next(err);
+              res.send(missions);
+            });
+        });
+    }
+    if(p.type == 'PLAN'){
+
+    }
+    if(p.type == 'INBOX'){
+
+    }
+  }
+
 });
+
+app.get('/api/mission', function (req, res, next) {
+  if (req.query.id) {
+    var para = {"_id":req.query.id};
+    Mission
+      .find(para)
+      .exec(function (err, missions) {
+        if (err) return next(err);
+        res.send(missions);
+      });
+  }
 });
+
 
 app.use(function (req, res) {
   Router.match({routes: routes.default, location: req.url}, function (err, redirectLocation, renderProps) {

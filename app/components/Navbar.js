@@ -32,10 +32,10 @@ class Navbar extends React.Component {
           </div>
           <div className="collapse navbar-collapse">
             <ul className="nav navbar-nav">
-              <li className=""><a href="Inbox">Inbox</a></li>
-              <li className=""><a href="Tasks">Tasks</a></li>
-              <li className=""><a href="Plans">Plans</a></li>
-              <li className=""><a href="Trash">Trash</a></li>
+              <li className=""><a href="/Inbox">Inbox</a></li>
+              <li className=""><a href="/Tasks">Tasks</a></li>
+              <li className=""><a href="/Plans">Plans</a></li>
+              <li className=""><a href="/Trash">Trash</a></li>
             </ul>
             <form className="navbar-form navbar-left" role="search">
               <div className="form-group">

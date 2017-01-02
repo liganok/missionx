@@ -3,8 +3,8 @@ import alt from '../alt';
 class TaskActions {
   constructor() {
     this.generateActions(
-      'getToDo',
-      'getDone'
+      'selectToDo',
+      'selectDone'
     );
   }
 
