@@ -14,6 +14,7 @@ class MissionDetail extends React.Component {
   componentDidMount() {
     MissionDetailStore.listen(this.onChange);
     var para = this.props.params;
+    para.isDone = false;
     MissionDetailActions.getMission(para);
     MissionDetailActions.getSubItems(para);
 

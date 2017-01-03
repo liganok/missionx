@@ -11,6 +11,8 @@ class PlansStore {
     this.isDone;
     this.missionId = '';
     this.selection = {todo:true,done:false};
+    this.selectionPara = {isDone:{$in:[true,false]}};
+
   }
 
   onGetPlansSuccess(data) {
@@ -39,11 +41,11 @@ class PlansStore {
   }
 
   handleUpdateMissionsSuccess(data){
-    PlansActions.getMissions();
+    PlansActions.getPlans(this.selectionPara);
   }
 
   handleAddMissionSuccess(data){
-    PlansActions.getMissions();
+    PlansActions.getPlans(this.selectionPara);
   }
 
   onSelectToDo(event){
@@ -53,7 +55,7 @@ class PlansStore {
     this.selection.todo = toDoCheck;
 
     if(toDoCheck && !doneCheck){
-      isDone = [false,false];
+      this.selectionPara.isDone = [false,false];
     }
 
     if(toDoCheck && doneCheck){
@@ -72,8 +74,8 @@ class PlansStore {
       status = {$in:isDone}
     }
 
-    var para = {type:"TASK",isDone:status};
-    PlansActions.getPlans(para);
+    this.selectionPara.isDone = status;
+    PlansActions.getPlans(this.selectionPara);
   }
 
   onSelectDone(event){
@@ -103,8 +105,8 @@ class PlansStore {
       status = {$in:isDone}
     }
 
-    var para = {type:"TASK",isDone:status};
-    PlansActions.getPlans(para);
+    this.selectionPara.isDone = status;
+    PlansActions.getPlans(this.selectionPara);
   }
 
 }

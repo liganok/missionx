@@ -4,8 +4,8 @@ import AddMissionActions from '../actions/AddMissionActions';
 
 class MissionDetailStore {
   constructor() {
-    this.bindAction(AddMissionActions.addMissionSuccess, this.handleAddMissionSuccess);
     this.bindActions(MissionDetailActions);
+    this.bindAction(AddMissionActions.addMissionSuccess, this.handleAddMissionSuccess);
     this.subItems=[];
     this.isDone;
     this.mission={};
@@ -13,7 +13,6 @@ class MissionDetailStore {
   }
 
   handleAddMissionSuccess(data){
-    alert("test");
   }
 
   onGetParentSuccess(data) {

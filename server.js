@@ -50,8 +50,8 @@ app.post('/api/missions', function (req, res, next) {
   if (req.body.type == 'TASK') {
     if (req.body.parentId) {
       parentId = req.body.parentId
-    }else{
-      parentId = 'TASK';
+    } else {
+      parentId = _id;
     }
   }
 
@@ -61,7 +61,8 @@ app.post('/api/missions', function (req, res, next) {
       parentId: parentId,
       name: name,
       createTime: time,
-      updateTime: time
+      updateTime: time,
+      status: 'ACTIVE'
     });
     mission.save(function (err) {
       if (err) return next(err);
@@ -95,7 +96,7 @@ app.put('/api/missions', function (req, res, next) {
 
 app.get('/api/missions', function (req, res, next) {
 
-   var isDone = req.query.isDone;
+  /* var isDone = req.query.isDone;
    console.log(req.query.id);
    if (isDone == null) {
    isDone = false
@@ -114,9 +115,9 @@ app.get('/api/missions', function (req, res, next) {
    .exec(function (err, missions) {
    if (err) return next(err);
    res.send(missions);
-   });
+   });*/
 
-/*  var p = req.query;
+  var p = req.query;
 
   if (p.id) {
     var para = {'isDone': p.isDone, "parentId": p.id};
@@ -160,7 +161,7 @@ app.get('/api/missions', function (req, res, next) {
     if (p.type == 'INBOX') {
 
     }
-  }*/
+  }
 
 });
 
