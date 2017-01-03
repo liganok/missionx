@@ -45,11 +45,13 @@ app.post('/api/missions', function (req, res, next) {
   console.log(req.body.type);
 
   if (req.body.type == 'PLAN') {
-    var parentId = _id;
+    var parentId = null;
   }
   if (req.body.type == 'TASK') {
     if (req.body.parentId) {
       parentId = req.body.parentId
+    }else{
+      parentId = 'TASK';
     }
   }
 
