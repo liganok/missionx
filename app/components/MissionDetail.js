@@ -13,10 +13,9 @@ class MissionDetail extends React.Component {
 
   componentDidMount() {
     MissionDetailStore.listen(this.onChange);
-    var para = this.props.params;
-    para.isDone = false;
-    MissionDetailActions.getMission(para);
-    MissionDetailActions.getSubItems(para);
+    this.state.selectionPara.id = this.props.params.id;
+    MissionDetailActions.getMission(this.state.selectionPara);
+    MissionDetailActions.getSubItems(this.state.selectionPara);
 
   }
 
@@ -44,25 +43,25 @@ class MissionDetail extends React.Component {
 
     return (
       <div>
-        <a href={"../detail/"+this.props.params.id}>{this.props.params.id} ></a>
+        <a href={"../detail/" + this.state.parent._id}>{this.state.parent.name ? this.state.parent.name + '>' : ''}</a>
         <div className="pull-right">
           <button type="button" className="btn-link">Edit</button>
           <button type="button" className="btn-link">Delete</button>
         </div>
-        <ul className="nav nav-list nav-divider">
+        <div className="nav nav-list nav-divider">
           <li className="nav-divider"></li>
-        </ul>
+        </div>
         <blockquote>
           <input type="checkbox"/>
-          {this.state.mission.name}
+          <span style={{marginLeft:4}}>{this.state.mission.name}</span>
           <span className="badge pull-right">11/20</span>
-          <small> {this.state.mission.name}</small>
+          <small>{this.state.mission.name}</small>
         </blockquote>
 
         <div>
           <small>Sub items</small>
           <div className="well">
-            <AddMission para={{type:"TASK",parentId:this.props.params.id}}/>
+            <AddMission para={{type: "TASK", parentId: this.props.params.id}}/>
             <div className="">
               <input type="checkbox" checked="true"/> <span><small>To Do</small></span>
               <input type="checkbox"/> <span><small>Done</small></span>

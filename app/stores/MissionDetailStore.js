@@ -10,17 +10,17 @@ class MissionDetailStore {
     this.isDone;
     this.mission={};
     this.parent={};
-  }
-
-  handleAddMissionSuccess(data){
+    this.selection = {todo:true,done:false};
+    this.selectionPara = {id:'',isDone:{$in:[true,false]}};
   }
 
   onGetParentSuccess(data) {
-    this.parent = data;
+    this.parent = data[0];
   }
 
   onGetMissionSuccess(data) {
     this.mission = data[0];
+    MissionDetailActions.getParent({id:this.mission.parentId});
   }
 
   onGetSubItemsSuccess(data) {
@@ -34,12 +34,16 @@ class MissionDetailStore {
   }
 
   onUpdateMissionsSuccess(data) {
-    for (var i in this.missions) {
-      if (this.missions[i]._id == this.missionId) {
-        this.missions[i].isDone = this.isDone;
-        this.missions.splice(i, 1);
+    for (var i in this.subItems) {
+      if (this.subItems[i]._id == this.mission.id) {
+        this.subItems[i].isDone = this.isDone;
+        this.subItems.splice(i, 1);
       }
     }
+  }
+
+  handleAddMissionSuccess(data){
+    MissionDetailActions.getSubItems(this.selectionPara);
   }
 
 }

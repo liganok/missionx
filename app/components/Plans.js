@@ -4,8 +4,6 @@ import {Link} from 'react-router';
 import PlansStore from '../stores/PlansStore';
 import PlansActions from '../actions/PlansActions';
 
-import MissionList from './MissionList';
-
 class Plans extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +13,7 @@ class Plans extends React.Component {
 
   componentDidMount() {
     PlansStore.listen(this.onChange);
-    PlansActions.getPlans({isDone: false});
+    PlansActions.getPlans(this.state.selectionPara);
   }
 
   componentWillUnmount() {

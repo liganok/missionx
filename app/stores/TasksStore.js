@@ -1,13 +1,12 @@
 import alt from '../alt';
-import PlansActions from '../actions/PlansActions';
-import TaskActions from '../actions/TasksActions';
+import TasksActions from '../actions/TasksActions';
 import AddMissionActions from '../actions/AddMissionActions';
 
-class PlansStore {
+class TasksStore {
   constructor() {
-    this.bindActions(PlansActions);
+    this.bindActions(TasksActions);
     this.bindAction(AddMissionActions.addMissionSuccess, this.handleAddMissionSuccess);
-    this.plans = [];
+    this.tasks = [];
     this.isDone;
     this.missionId = '';
     this.selection = {todo:true,done:false};
@@ -15,22 +14,23 @@ class PlansStore {
 
   }
 
-  onGetPlansSuccess(data) {
-    this.plans = data;
+  onGetTasksSuccess(data) {
+    alert(JSON.stringify((data)));
+    this.tasks = data;
   }
 
   onChangeStatus(event) {
     this.isDone = event.target.checked;
     this.missionId = event.target.parentNode.id;
-    PlansActions.updateStatus(this.missionId, this.isDone);
+    TasksActions.updateStatus(this.missionId, this.isDone);
   }
 
-  onUpdatePlanSuccess(data) {
-    for (var i in this.plans) {
-      if (this.plans[i]._id == this.missionId) {
-        this.plans[i].isDone = this.isDone;
+  onUpdateTaskSuccess(data) {
+    for (var i in this.tasks) {
+      if (this.tasks[i]._id == this.missionId) {
+        this.tasks[i].isDone = this.isDone;
         if(!(this.selection.todo == true && this.selection.done == true)){
-          this.plans.splice(i, 1);
+          this.tasks.splice(i, 1);
         }
       }
     }
@@ -41,11 +41,11 @@ class PlansStore {
   }
 
   handleUpdateMissionsSuccess(data){
-    PlansActions.getPlans(this.selectionPara);
+    TasksActions.getTasks(this.selectionPara);
   }
 
   handleAddMissionSuccess(data){
-    PlansActions.getPlans(this.selectionPara);
+    TasksActions.getTasks(this.selectionPara);
   }
 
   onSelectToDo(event){
@@ -75,7 +75,7 @@ class PlansStore {
     }
 
     this.selectionPara.isDone = status;
-    PlansActions.getPlans(this.selectionPara);
+    TasksActions.getTasks(this.selectionPara);
   }
 
   onSelectDone(event){
@@ -106,9 +106,9 @@ class PlansStore {
     }
 
     this.selectionPara.isDone = status;
-    PlansActions.getPlans(this.selectionPara);
+    TasksActions.getTasks(this.selectionPara);
   }
 
 }
 
-export default alt.createStore(PlansStore);
+export default alt.createStore(TasksStore);

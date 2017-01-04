@@ -11,7 +11,9 @@ class MissionDetailActions {
       'getSubItemsFail',
       'updateMissionSuccess',
       'updateMissionFail',
-      'changeStatus'
+      'changeStatus',
+      'selectToDo',
+      'selectDone'
     );
   }
 

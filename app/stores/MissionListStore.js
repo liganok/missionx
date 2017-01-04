@@ -1,6 +1,6 @@
 import alt from '../alt';
 import MissionListActions from '../actions/MissionListActions';
-import TaskActions from '../actions/TaskActions';
+import TaskActions from '../actions/TasksActions';
 import AddMissionActions from '../actions/AddMissionActions';
 
 class MissionListStore {

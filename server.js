@@ -183,17 +183,13 @@ app.get('/api/tasks', function (req, res, next) {
 
   var p = req.query;
   console.log(p.isDone);
+
+  var para = {'isDone': p.isDone};
   Mission
-    .find({'parentId': {$ne: null}})
-    .exec(function (err, missions_tmp) {
+    .find(para)
+    .exec(function (err, missions) {
       if (err) return next(err);
-      var para = {'isDone': p.isDone, '_id': {"$nin": missions_tmp.parentId}};
-      Mission
-        .find(para)
-        .exec(function (err, missions) {
-          if (err) return next(err);
-          res.send(missions);
-        });
+      res.send(missions);
     });
 
 });
