@@ -10,7 +10,7 @@ class TasksStore {
     this.isDone;
     this.missionId = '';
     this.selection = {todo:true,done:false};
-    this.selectionPara = {isDone:{$in:[true,false]}};
+    this.selectionPara = {isDone:{$in:[false,false]}};
 
   }
 
@@ -54,7 +54,7 @@ class TasksStore {
     this.selection.todo = toDoCheck;
 
     if(toDoCheck && !doneCheck){
-      this.selectionPara.isDone = [false,false];
+      isDone = [false,false];
     }
 
     if(toDoCheck && doneCheck){

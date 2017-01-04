@@ -187,6 +187,7 @@ app.get('/api/tasks', function (req, res, next) {
   var para = {'isDone': p.isDone};
   Mission
     .find(para)
+    //.where('_id').equals(this.parentId)
     .exec(function (err, missions) {
       if (err) return next(err);
       res.send(missions);
