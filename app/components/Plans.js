@@ -24,7 +24,6 @@ class Plans extends React.Component {
     this.setState(state);
   }
 
-
   render() {
     let plans = this.state.plans.map((mission, index) => {
       return (
@@ -39,11 +38,11 @@ class Plans extends React.Component {
     return (
       <div>
         <AddMission para={{type: "PLAN"}}/>
-          <div className="" style={{marginTop: 5}}>
-            <input type="checkbox" checked={this.state.selection.todo} onChange={PlansActions.selectToDo}/>
-            <span style={{marginRight: 5}}><small> To Do</small></span>
-            <input type="checkbox" checked={this.state.selection.done} onChange={PlansActions.selectDone}/>
-            <span><small> Done</small></span>
+        <div className="" style={{marginTop: 5}}>
+          <input type="checkbox" checked={this.state.selection.todo} onChange={PlansActions.selectToDo}/>
+          <span style={{marginRight: 5}}><small> To Do</small></span>
+          <input type="checkbox" checked={this.state.selection.done} onChange={PlansActions.selectDone}/>
+          <span><small> Done</small></span>
           <ul className="list-group">
             {plans}
           </ul>

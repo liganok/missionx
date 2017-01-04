@@ -15,7 +15,6 @@ class TasksStore {
   }
 
   onGetTasksSuccess(data) {
-    alert(JSON.stringify((data)));
     this.tasks = data;
   }
 
