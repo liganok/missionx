@@ -185,6 +185,7 @@ app.get('/api/plans', function (req, res, next) {
 app.get('/api/tasks', function (req, res, next) {
 
   var p = req.query;
+
   console.log(p.isDone);
 
 /*  var para = {'isDone': p.isDone,'parentId':'000000000000000000000000'};
