@@ -45,13 +45,14 @@ app.post('/api/missions', function (req, res, next) {
   console.log(req.body.type);
 
   if (req.body.type == 'PLAN') {
-    parentId = mongoose.Types.ObjectId('000000000000000000000000');
+    parentId = null;
+    var type = 'PLAN';
   }
   if (req.body.type == 'TASK') {
     if (req.body.parentId) {
       parentId = req.body.parentId
     } else {
-      parentId = mongoose.Types.ObjectId('000000000000000000000001');
+      parentId = null;
     }
   }
 
@@ -60,6 +61,7 @@ app.post('/api/missions', function (req, res, next) {
       _id: _id,
       parentId: parentId,
       name: name,
+      type: type,
       description:name,
       createTime: time,
       updateTime: time,
@@ -170,7 +172,7 @@ app.get('/api/plans', function (req, res, next) {
 
   var p = req.query;
   console.log(p.isDone);
-  var para = {'isDone': p.isDone, 'parentId': '000000000000000000000000'};
+  var para = {'isDone': p.isDone, 'parentId': null, 'type':'PLAN',};
   Mission
     .find(para)
     .exec(function (err, plans) {
@@ -200,7 +202,7 @@ app.get('/api/tasks', function (req, res, next) {
       if (err) return next(err);
       var parentIdArr = missions_tmp.map(function (mission){return mission.parentId});
       console.log(parentIdArr);
-      var para = {'isDone': p.isDone,'parentId': {$ne: '000000000000000000000000'}, '_id': {$nin: parentIdArr}};
+      var para = {'isDone': p.isDone, '_id': {$nin: parentIdArr},'type':{$ne:'PLAN'}};
       Mission
         .find(para)
         .exec(function (err, missions) {
