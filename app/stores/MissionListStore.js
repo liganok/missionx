@@ -6,7 +6,6 @@ import AddMissionActions from '../actions/AddMissionActions';
 class MissionListStore {
   constructor() {
     this.bindActions(MissionListActions);
-    this.bindActions(TaskActions);
     this.bindAction(AddMissionActions.addMissionSuccess, this.handleAddMissionSuccess);
     this.missions = [];
     this.isDone;
