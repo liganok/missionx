@@ -172,12 +172,23 @@ app.get('/api/plans', function (req, res, next) {
 
   var p = req.query;
   console.log(p.isDone);
-  var para = {'isDone': p.isDone, 'parentId': null, 'type':'PLAN',};
   Mission
-    .find(para)
-    .exec(function (err, plans) {
+    .find({})
+    .exec(function (err, missions_tmp) {
       if (err) return next(err);
-      res.send(plans);
+      var parentIdArr = missions_tmp.map(function (mission){return mission.parentId});
+      console.log(parentIdArr);
+      var para = {$or:[{'isDone': p.isDone, 'parentId': null, 'type':'PLAN'},{'isDone': p.isDone, 'parentId': null,'_id': {$in: parentIdArr} }]}
+      Mission
+        .find(para)
+        .exec(function (err, missions) {
+          if (err) return next(err);
+          missions.map(function (mission) {
+            var count = Mission.count({'parentId':mission._id});
+            console.log('badge'+ count.length);
+          });
+          res.send(missions);
+        });
     });
 
 });

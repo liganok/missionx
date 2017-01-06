@@ -60,9 +60,9 @@ class MissionDetail extends React.Component {
 
         <div>
           <small>Sub items</small>
-          <div className="well">
+          <div className="" >
             <AddMission para={{type: "TASK", parentId: this.props.params.id}}/>
-            <div className="">
+            <div className="" style={{marginTop: 5}}>
               <input type="checkbox" checked="true"/> <span><small>To Do</small></span>
               <input type="checkbox"/> <span><small>Done</small></span>
             </div>
