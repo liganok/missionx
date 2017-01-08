@@ -30,7 +30,7 @@ class Plans extends React.Component {
         <li id={mission._id} className='list-group-item animated fadeIn'>
           <input type="checkbox" checked={mission.isDone} onChange={PlansActions.changeStatus}/>
           <a href ={'detail/' + mission._id}><span className="H5" style={{marginLeft: 4}}>{mission.name}</span></a>
-          <span className="badge">5/14</span>
+          <span className="badge">{mission.childNumDone}/{mission.childNum}</span>
         </li>
       );
     });

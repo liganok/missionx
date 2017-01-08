@@ -62,7 +62,7 @@ app.post('/api/missions', function (req, res, next) {
       parentId: parentId,
       name: name,
       type: type,
-      description:name,
+      description: name,
       createTime: time,
       updateTime: time,
       status: 'ACTIVE'
@@ -173,49 +173,83 @@ app.get('/api/plans', function (req, res, next) {
   var p = req.query;
   console.log(p.isDone);
 
-  async.waterfall([
-    function (callback) {
-      Mission
-        .find({'parentId':{$ne:null}})
-        .exec(function (err, missions_tmp) {
-          if (err) return next(err);
-          var parentIdArr = missions_tmp.map(function (mission){return mission.parentId});
-          console.log(parentIdArr);
-          callback(err,parentIdArr);
+  async.auto({
+      get_parent: function (callback) {
+        Mission
+          .find({'parentId': {$ne: null}})
+          .exec(function (err, missions_tmp) {
+            if (err) return next(err);
+            var parentIdArr = missions_tmp.map(function (mission) {
+              return mission.parentId
             });
-    },
-    function (parentIdArr,callback) {
-      var para = {$or:[{'isDone': p.isDone, 'parentId': null, 'type':'PLAN'},{'isDone': p.isDone, 'parentId': null,'_id': {$in: parentIdArr} }]}
-      Mission
-        .find(para)
-        .exec(function (err, missions) {
-          if (err) return next(err);
-          missions.map(function (mission) {
-            var count = Mission.count({'parentId':mission._id});
-            console.log('badge'+ count.length);
+            //console.log(parentIdArr);
+            callback(null, parentIdArr);
           });
-          res.send(missions);
-        });
-    }]);
+      },
+      get_child_num: function (callback) {
+        Mission
+          .aggregate()
+          .match({parentId: {$ne: null}})
+          .group({_id: '$parentId', num: {$sum: 1}})
+          .exec(function (err, res) {
+            callback(null, res);
+          });
+      },
+      get_child_num_done: function (callback) {
+        Mission
+          .aggregate()
+          .match({parentId: {$ne: null}, isDone: true})
+          .group({_id: '$parentId', num: {$sum: 1}})
+          .exec(function (err, res2) {
+            callback(null, res2);
+          });
+      },
+      get_plans: ['get_parent', function (results, callback) {
+        var parentIdArr = results.get_parent;
+        var para = {
+          $or: [{'isDone': p.isDone, 'parentId': null, 'type': 'PLAN'}, {
+            'isDone': p.isDone,
+            'parentId': null,
+            '_id': {$in: parentIdArr}
+          }]
+        }
+        Mission
+          .find(para)
+          .exec(function (err, missions) {
+            if (err) return next(err);
+            //console.log('get_plans',parentIdArr);
+            callback(null, missions);
+          });
+      }],
 
-  /*Mission
-    .find({'parentId':{$ne:null}})
-    .exec(function (err, missions_tmp) {
-      if (err) return next(err);
-      var parentIdArr = missions_tmp.map(function (mission){return mission.parentId});
-      console.log(parentIdArr);
-      var para = {$or:[{'isDone': p.isDone, 'parentId': null, 'type':'PLAN'},{'isDone': p.isDone, 'parentId': null,'_id': {$in: parentIdArr} }]}
-      Mission
-        .find(para)
-        .exec(function (err, missions) {
-          if (err) return next(err);
-          missions.map(function (mission) {
-            var count = Mission.count({'parentId':mission._id});
-            console.log('badge'+ count.length);
-          });
-          res.send(missions);
-        });
-    });*/
+    },
+    function (err, results) {
+      var plans = results.get_plans.map(function (item) {
+        let child = results.get_child_num.find((n) => n._id.equals(item._id));
+        var childNum = child? child.num : 0;
+        let childDone = results.get_child_num_done.find((n) => n._id.equals(item._id));
+        var childNumDone = childDone ? childDone.num : 0;
+        let plan = {
+          _id: item._id,
+          parentId: item.parentId,
+          name: item.name,
+          description: item.description,
+          type: item.type,
+          createTime: item.createTime,
+          updateTime: item.updateTime,
+          dueTime: item.dueTime,
+          tags: item.tags,
+          status:item.status,
+          childNum: childNum,
+          childNumDone: childNumDone
+        };
+        return plan;
+      })
+
+      console.log('plans',plans );
+      res.send(plans)
+    }
+  );
 
 });
 
@@ -225,22 +259,24 @@ app.get('/api/tasks', function (req, res, next) {
 
   console.log(p.isDone);
 
-/*  var para = {'isDone': p.isDone,'parentId':'000000000000000000000000'};
-  Mission
-    .find(para)
-    //.$where('this._id.toString() === this.parentId.toString()')
-    .exec(function (err, missions) {
-      if (err) return next(err);
-      res.send(missions);
-    });*/
+  /*  var para = {'isDone': p.isDone,'parentId':'000000000000000000000000'};
+   Mission
+   .find(para)
+   //.$where('this._id.toString() === this.parentId.toString()')
+   .exec(function (err, missions) {
+   if (err) return next(err);
+   res.send(missions);
+   });*/
 
   Mission
     .find({})
     .exec(function (err, missions_tmp) {
       if (err) return next(err);
-      var parentIdArr = missions_tmp.map(function (mission){return mission.parentId});
+      var parentIdArr = missions_tmp.map(function (mission) {
+        return mission.parentId
+      });
       console.log(parentIdArr);
-      var para = {'isDone': p.isDone, '_id': {$nin: parentIdArr},'type':{$ne:'PLAN'}};
+      var para = {'isDone': p.isDone, '_id': {$nin: parentIdArr}, 'type': {$ne: 'PLAN'}};
       Mission
         .find(para)
         .exec(function (err, missions) {

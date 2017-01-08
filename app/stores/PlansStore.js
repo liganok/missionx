@@ -17,6 +17,7 @@ class PlansStore {
 
   onGetPlansSuccess(data) {
     this.plans = data;
+    //alert(JSON.stringify(this.plans));
   }
 
   onChangeStatus(event) {
