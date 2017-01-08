@@ -99,27 +99,6 @@ app.put('/api/missions', function (req, res, next) {
 
 app.get('/api/missions', function (req, res, next) {
 
-  /* var isDone = req.query.isDone;
-   console.log(req.query.id);
-   if (isDone == null) {
-   isDone = false
-   }
-   if (req.query.id) {
-   var para = {'isDone': isDone, "parentId": req.query.id, "_id":{$ne:req.query.id}};
-   } else {
-   if(isDone){
-   para = {'isDone': {"$in":req.query.isDone}};
-   }else {
-   para = {'ID': 1};
-   }
-   }
-   Mission
-   .find(para)
-   .exec(function (err, missions) {
-   if (err) return next(err);
-   res.send(missions);
-   });*/
-
   var p = req.query;
 
   if (p.id) {
@@ -130,40 +109,6 @@ app.get('/api/missions', function (req, res, next) {
         if (err) return next(err);
         res.send(missions);
       });
-  } else {
-    if (p.type == 'TASK') {
-      console.log(p.isDone);
-      Mission
-        .find({'parentId': {$ne: null}})
-        .exec(function (err, missions_tmp) {
-          if (err) return next(err);
-          var para = {'isDone': p.isDone, '_id': {"$nin": missions_tmp.parentId}};
-          Mission
-            .find(para)
-            .exec(function (err, missions) {
-              if (err) return next(err);
-              res.send(missions);
-            });
-        });
-    }
-    if (p.type == 'PLAN') {
-      console.log(p.isDone);
-      Mission
-        .find({'parentId': {$ne: null}})
-        .exec(function (err, missions_tmp) {
-          if (err) return next(err);
-          var para = {'isDone': p.isDone, '_id': {"$in": missions_tmp.parentId}};
-          Mission
-            .find(para)
-            .exec(function (err, missions) {
-              if (err) return next(err);
-              res.send(missions);
-            });
-        });
-    }
-    if (p.type == 'INBOX') {
-
-    }
   }
 
 });

@@ -30,7 +30,6 @@ class Tasks extends React.Component {
         <li id={mission._id} className='list-group-item animated fadeIn'>
           <input type="checkbox" checked={mission.isDone} onChange={TasksActions.changeStatus}/>
           <Link to={'detail/' + mission._id}><span className="H5" style={{marginLeft: 4}}>{mission.name}</span></Link>
-          <span className="badge">5/14</span>
         </li>
       );
     });

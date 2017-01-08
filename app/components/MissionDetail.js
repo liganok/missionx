@@ -32,18 +32,16 @@ class MissionDetail extends React.Component {
     let MissionDetail = this.state.subItems.map((mission, index) => {
       return (
         <div key={mission._id} id={mission._id} className='list-group-item animated fadeIn'>
-          <h4 className='media-heading'>
-            <input type='checkbox' checked={mission.isDone}
-                   onChange={MissionDetailActions.changeStatus}/>
-            <a href={"../detail/" + mission._id}><span className="H5" style={{marginLeft: 4}}>{mission.name}</span></a>
-          </h4>
+          <input type='checkbox' checked={mission.isDone}
+                 onChange={MissionDetailActions.changeStatus}/>
+          <a href={"../detail/" + mission._id}><span className="H5" style={{marginLeft: 4}}>{mission.name}</span></a>
         </div>
       );
     });
 
     return (
       <div>
-        <a href={"../detail/" + this.state.parent._id}>{this.state.parent.name ? this.state.parent.name + '>' : ''}</a>
+        <a href={"../detail/" + this.state.parent._id}>{this.state.parent.name ? this.state.parent.name + '>' : '>'}</a>
         <div className="pull-right">
           <button type="button" className="btn-link">Edit</button>
           <button type="button" className="btn-link">Delete</button>
@@ -53,14 +51,14 @@ class MissionDetail extends React.Component {
         </div>
         <blockquote>
           <input type="checkbox"/>
-          <span style={{marginLeft:4}}>{this.state.mission.name}</span>
-          <span className="badge pull-right">11/20</span>
+          <span style={{marginLeft: 4}}>{this.state.mission.name}</span>
+          {/*<span className="badge pull-right">11/20</span>*/}
           <small>{this.state.mission.name}</small>
         </blockquote>
 
         <div>
           <small>Sub items</small>
-          <div className="" >
+          <div className="">
             <AddMission para={{type: "TASK", parentId: this.props.params.id}}/>
             <div className="" style={{marginTop: 5}}>
               <input type="checkbox" checked="true"/> <span><small>To Do</small></span>
