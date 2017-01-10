@@ -35,6 +35,7 @@ class MissionDetail extends React.Component {
           <input type='checkbox' checked={mission.isDone}
                  onChange={MissionDetailActions.changeStatus}/>
           <a href={"../detail/" + mission._id}><span className="H5" style={{marginLeft: 4}}>{mission.name}</span></a>
+          {mission.childNum > 0 ? <span className="badge">{mission.childNumDone}/{mission.childNum}</span>:''}
         </div>
       );
     });

@@ -26,6 +26,9 @@ class Navbar extends React.Component {
       <nav className="navbar navbar-default" role="navigation">
         <div className="container-fluid col-md-10 col-md-offset-1">
           <div className="navbar-header">
+            <button type="button" className="navbar-toggle collapse" data-toggle="collapse">
+
+            </button>
             <a className="navbar-brand" href="#">
               <span>MissionX</span>
             </a>
