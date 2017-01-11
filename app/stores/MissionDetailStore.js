@@ -46,6 +46,67 @@ class MissionDetailStore {
     MissionDetailActions.getSubItems(this.selectionPara);
   }
 
+  onSelectToDo(event){
+    var toDoCheck = event.target.parentNode.childNodes[0].checked;
+    var doneCheck = event.target.parentNode.childNodes[2].checked;
+    var isDone;
+    this.selection.todo = toDoCheck;
+
+    if(toDoCheck && !doneCheck){
+      isDone = [false,false];
+    }
+
+    if(toDoCheck && doneCheck){
+      isDone = [false,true];
+    }
+
+    if(!toDoCheck && doneCheck){
+      isDone = [true,true];
+    }
+
+    if(!toDoCheck && !doneCheck){
+      isDone = null;
+    }
+    var status;
+    if(isDone){
+      status = {$in:isDone}
+    }
+
+    this.selectionPara.isDone = status;
+    MissionDetailActions.getSubItems(this.selectionPara);
+  }
+
+  onSelectDone(event){
+    var toDoCheck = event.target.parentNode.childNodes[0].checked;
+    var doneCheck = event.target.parentNode.childNodes[2].checked;
+    var isDone;
+    this.selection.done = doneCheck;
+
+    if(toDoCheck && !doneCheck){
+      isDone = [false,false];
+    }
+
+    if(toDoCheck && doneCheck){
+      isDone = [false,true];
+    }
+
+    if(!toDoCheck && doneCheck){
+      isDone = [true,true];
+    }
+
+    if(!toDoCheck && !doneCheck){
+      isDone = null;
+    }
+
+    var status;
+    if(isDone){
+      status = {$in:isDone}
+    }
+
+    this.selectionPara.isDone = status;
+    MissionDetailActions.getSubItems(this.selectionPara);
+  }
+
 }
 
 export default alt.createStore(MissionDetailStore);

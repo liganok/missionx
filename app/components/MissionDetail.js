@@ -62,8 +62,10 @@ class MissionDetail extends React.Component {
           <div className="">
             <AddMission para={{type: "TASK", parentId: this.props.params.id}}/>
             <div className="" style={{marginTop: 5}}>
-              <input type="checkbox" checked="true"/> <span><small>To Do</small></span>
-              <input type="checkbox"/> <span><small>Done</small></span>
+              <input type="checkbox" checked={this.state.selection.todo} onChange={MissionDetailActions.selectToDo}/>
+              <span style={{marginRight: 5}}><small> To Do</small></span>
+              <input type="checkbox" checked={this.state.selection.done} onChange={MissionDetailActions.selectDone}/>
+              <span><small> Done</small></span>
             </div>
             <div style={{marginTop: 2}}>
               <div className='list-group'>
