@@ -81,7 +81,7 @@ app.put('/api/missions', function (req, res, next) {
   var missionId = req.body.missionId;
   var isDone = req.body.isDone;
   var time = new Date().getTime();
-  console.log(missionId + isDone);
+  console.log('put',missionId + isDone);
   if (missionId) {
     console.log(missionId + isDone + '2');
     try {
@@ -100,7 +100,7 @@ app.put('/api/missions', function (req, res, next) {
 app.get('/api/missions', function (req, res, next) {
 
   var p = req.query;
-  console.log('id',p.id);
+  console.log('id',p.isDone);
   if (p.id) {
     async.auto({
         get_child_num: function (callback) {
@@ -148,6 +148,7 @@ app.get('/api/missions', function (req, res, next) {
             createTime: item.createTime,
             updateTime: item.updateTime,
             dueTime: item.dueTime,
+            isDone: item.isDone,
             tags: item.tags,
             status:item.status,
             childNum: childNum,
@@ -156,7 +157,7 @@ app.get('/api/missions', function (req, res, next) {
           return plan;
         })
 
-        console.log('subitems',plans );
+        //console.log('subitems',plans );
         res.send(plans)
       }
     );
@@ -235,6 +236,7 @@ app.get('/api/plans', function (req, res, next) {
           createTime: item.createTime,
           updateTime: item.updateTime,
           dueTime: item.dueTime,
+          isDone: item.isDone,
           tags: item.tags,
           status:item.status,
           childNum: childNum,
@@ -243,7 +245,7 @@ app.get('/api/plans', function (req, res, next) {
         return plan;
       })
 
-      console.log('plans',plans );
+      //console.log('plans',plans );
       res.send(plans)
     }
   );
@@ -256,15 +258,6 @@ app.get('/api/tasks', function (req, res, next) {
 
   console.log(p.isDone);
 
-  /*  var para = {'isDone': p.isDone,'parentId':'000000000000000000000000'};
-   Mission
-   .find(para)
-   //.$where('this._id.toString() === this.parentId.toString()')
-   .exec(function (err, missions) {
-   if (err) return next(err);
-   res.send(missions);
-   });*/
-
   Mission
     .find({})
     .exec(function (err, missions_tmp) {
@@ -272,7 +265,7 @@ app.get('/api/tasks', function (req, res, next) {
       var parentIdArr = missions_tmp.map(function (mission) {
         return mission.parentId
       });
-      console.log(parentIdArr);
+      //console.log(parentIdArr);
       var para = {'isDone': p.isDone, '_id': {$nin: parentIdArr}, 'type': {$ne: 'PLAN'}};
       Mission
         .find(para)

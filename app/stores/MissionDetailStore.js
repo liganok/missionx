@@ -6,12 +6,13 @@ class MissionDetailStore {
   constructor() {
     this.bindActions(MissionDetailActions);
     this.bindAction(AddMissionActions.addMissionSuccess, this.handleAddMissionSuccess);
-    this.subItems=[];
+    this.subItems = [];
     this.isDone;
-    this.mission={};
-    this.parent={};
-    this.selection = {todo:true,done:false};
-    this.selectionPara = {id:'',isDone:{$in:[true,false]}};
+    this.mission = {};
+    this.parent = {};
+    this.missionId
+    this.selection = {todo: true, done: false};
+    this.selectionPara = {id: '', isDone: {$in: [false, false]}};
   }
 
   onGetParentSuccess(data) {
@@ -20,87 +21,91 @@ class MissionDetailStore {
 
   onGetMissionSuccess(data) {
     this.mission = data[0];
-    MissionDetailActions.getParent({id:this.mission.parentId});
+    MissionDetailActions.getParent({id: this.mission.parentId});
   }
 
   onGetSubItemsSuccess(data) {
     this.subItems = data;
+    //alert(JSON.stringify(this.subItems));
   }
 
   onChangeStatus(event) {
     this.isDone = event.target.checked;
-    this.missionId = event.target.parentNode.parentNode.id;
+    //alert(this.isDone);
+    this.missionId = event.target.parentNode.id;
     MissionDetailActions.updateStatus(this.missionId, this.isDone);
   }
 
-  onUpdateMissionsSuccess(data) {
+  onUpdateMissionSuccess(data) {
     for (var i in this.subItems) {
-      if (this.subItems[i]._id == this.mission.id) {
+      if (this.subItems[i]._id == this.missionId) {
         this.subItems[i].isDone = this.isDone;
-        this.subItems.splice(i, 1);
+        if (!(this.selection.todo == true && this.selection.done == true)) {
+          this.subItems.splice(i, 1);
+        }
       }
     }
   }
 
-  handleAddMissionSuccess(data){
+  handleAddMissionSuccess(data) {
     MissionDetailActions.getSubItems(this.selectionPara);
   }
 
-  onSelectToDo(event){
+  onSelectToDo(event) {
     var toDoCheck = event.target.parentNode.childNodes[0].checked;
     var doneCheck = event.target.parentNode.childNodes[2].checked;
     var isDone;
     this.selection.todo = toDoCheck;
 
-    if(toDoCheck && !doneCheck){
-      isDone = [false,false];
+    if (toDoCheck && !doneCheck) {
+      isDone = [false, false];
     }
 
-    if(toDoCheck && doneCheck){
-      isDone = [false,true];
+    if (toDoCheck && doneCheck) {
+      isDone = [false, true];
     }
 
-    if(!toDoCheck && doneCheck){
-      isDone = [true,true];
+    if (!toDoCheck && doneCheck) {
+      isDone = [true, true];
     }
 
-    if(!toDoCheck && !doneCheck){
+    if (!toDoCheck && !doneCheck) {
       isDone = null;
     }
     var status;
-    if(isDone){
-      status = {$in:isDone}
+    if (isDone) {
+      status = {$in: isDone}
     }
 
     this.selectionPara.isDone = status;
     MissionDetailActions.getSubItems(this.selectionPara);
   }
 
-  onSelectDone(event){
+  onSelectDone(event) {
     var toDoCheck = event.target.parentNode.childNodes[0].checked;
     var doneCheck = event.target.parentNode.childNodes[2].checked;
     var isDone;
     this.selection.done = doneCheck;
 
-    if(toDoCheck && !doneCheck){
-      isDone = [false,false];
+    if (toDoCheck && !doneCheck) {
+      isDone = [false, false];
     }
 
-    if(toDoCheck && doneCheck){
-      isDone = [false,true];
+    if (toDoCheck && doneCheck) {
+      isDone = [false, true];
     }
 
-    if(!toDoCheck && doneCheck){
-      isDone = [true,true];
+    if (!toDoCheck && doneCheck) {
+      isDone = [true, true];
     }
 
-    if(!toDoCheck && !doneCheck){
+    if (!toDoCheck && !doneCheck) {
       isDone = null;
     }
 
     var status;
-    if(isDone){
-      status = {$in:isDone}
+    if (isDone) {
+      status = {$in: isDone}
     }
 
     this.selectionPara.isDone = status;

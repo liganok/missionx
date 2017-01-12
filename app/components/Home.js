@@ -1,6 +1,4 @@
 import React from 'react';
-import ToDoMissionList from './ToDoMissionList';
-import DoneMissionList from './DoneMissionList';
 import AddMission from './AddMission';
 
 class Home extends React.Component {
@@ -8,8 +6,6 @@ class Home extends React.Component {
     return (
       <div>
         <AddMission/>
-        <ToDoMissionList type='TODO'/>
-        <DoneMissionList type='Done'/>
       </div>
     );
   }

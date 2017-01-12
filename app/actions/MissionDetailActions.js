@@ -59,9 +59,9 @@ class MissionDetailActions {
       url: '/api/missions',
       data: {isDone:isDone, missionId:missionId}
     }).done((data)=>{
-      this.actions.updateMissionsSuccess(data);
+      this.actions.updateMissionSuccess(data);
     }).fail((jqxhr)=>{
-      this.actions.updateMissionsFail(jqxhr.responseJSON.message);
+      this.actions.updateMissionFail(jqxhr.responseJSON.message);
     });
   }
 
