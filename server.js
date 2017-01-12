@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  * POST /api/missions
  * Adds new mission to the database.
  */
-app.post('/api/missions', function (req, res, next) {
+app.post('/api/mission', function (req, res, next) {
   var name = req.body.name;
   var time = new Date().getTime();
   var _id = mongoose.Types.ObjectId();
@@ -161,7 +161,6 @@ app.get('/api/missions', function (req, res, next) {
         res.send(plans)
       }
     );
-
   }
 
 });
@@ -277,7 +276,6 @@ app.get('/api/tasks', function (req, res, next) {
 
 });
 
-
 app.get('/api/mission', function (req, res, next) {
   if (req.query.id) {
     console.log('get mission' + req.query.id);
@@ -291,6 +289,22 @@ app.get('/api/mission', function (req, res, next) {
   }
 });
 
+app.delete('/api/mission', function (req, res, next) {
+  let missionId = req.body.missionId;
+
+  Mission.findOne({_id:missionId},function (err, mission) {
+    if(err) return next(err);
+
+    if(!mission){
+      return res.status(404).send({message:'Mission not found.'});
+    }
+    mission.status = 'DELETED';
+    Mission.save(function (err) {
+      callback(err);
+    });
+    return res.send({message:mission.name + ' has been deleted.'});
+  });
+});
 
 app.use(function (req, res) {
   Router.match({routes: routes.default, location: req.url}, function (err, redirectLocation, renderProps) {

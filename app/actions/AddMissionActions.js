@@ -12,7 +12,7 @@ class AddMissionActions {
   addMission(para) {
     $.ajax({
       type: 'POST',
-      url: '/api/missions',
+      url: '/api/mission',
       data: para
     }).done((data)=>{
       this.actions.addMissionSuccess(data.message);
