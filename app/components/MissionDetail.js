@@ -45,7 +45,7 @@ class MissionDetail extends React.Component {
         <a href={"../detail/" + this.state.parent._id}>{this.state.parent.name ? this.state.parent.name + '>' : '>'}</a>
         <div className="pull-right">
           <button type="button" className="btn-link">Edit</button>
-          <button type="button" className="btn-link">Delete</button>
+          <button type="button" className="btn-link" onClick={MissionDetailActions.deleteMission}>Delete</button>
         </div>
         <div className="nav nav-list nav-divider">
           <li className="nav-divider"></li>

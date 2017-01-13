@@ -13,7 +13,11 @@ class MissionDetailActions {
       'updateMissionFail',
       'changeStatus',
       'selectToDo',
-      'selectDone'
+      'selectDone',
+      'deleteMission',
+      'deleteMissionSuccess',
+      'deleteMissionFail',
+      'editMission'
     );
   }
 
@@ -54,6 +58,7 @@ class MissionDetailActions {
   }
 
   updateStatus(missionId,isDone){
+    alert('test2');
     $.ajax({
       type: 'PUT',
       url: '/api/missions',
@@ -62,6 +67,19 @@ class MissionDetailActions {
       this.actions.updateMissionSuccess(data);
     }).fail((jqxhr)=>{
       this.actions.updateMissionFail(jqxhr.responseJSON.message);
+    });
+  }
+
+  deleteMission(para){
+    alert('test2');
+    $.ajax({
+      type: 'PUT',
+      url: '/api/missionDel',
+      data:para
+    }).done((data)=> {
+      this.actions.deleteMissionSuccess(data);
+    }).fail((jqxhr)=> {
+      this.actions.deleteMissionFail(jqxhr.responseJSON.message);
     });
   }
 

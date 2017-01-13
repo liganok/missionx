@@ -112,6 +112,16 @@ class MissionDetailStore {
     MissionDetailActions.getSubItems(this.selectionPara);
   }
 
+  onDeleteMission(event){
+    alert('test');
+    MissionDetailActions.deleteMission({missionId:this.mission._id});
+  }
+
+  onDeleteMissionSuccess(data){
+    alert('delete success');
+  }
+  onDeleteMissionFail(data){}
+
 }
 
 export default alt.createStore(MissionDetailStore);

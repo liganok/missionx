@@ -289,8 +289,9 @@ app.get('/api/mission', function (req, res, next) {
   }
 });
 
-app.delete('/api/mission', function (req, res, next) {
-  let missionId = req.body.missionId;
+app.put('/api/missionDel', function (req, res, next) {
+  var missionId = req.body.missionId;
+  console.log('delete',missionId);
 
   Mission.findOne({_id:missionId},function (err, mission) {
     if(err) return next(err);
@@ -300,9 +301,10 @@ app.delete('/api/mission', function (req, res, next) {
     }
     mission.status = 'DELETED';
     Mission.save(function (err) {
+      console.log('delete');
       callback(err);
+      return res.send({message:mission.name + ' has been deleted.'});
     });
-    return res.send({message:mission.name + ' has been deleted.'});
   });
 });
 
