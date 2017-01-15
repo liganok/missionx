@@ -1,11 +1,11 @@
 import React from 'react';
-import AddMission from './AddMission';
+import MissionList from './MissionList';
 
 class Home extends React.Component {
   render() {
     return (
       <div>
-        <AddMission/>
+        <MissionList/>
       </div>
     );
   }

@@ -17,6 +17,7 @@ var xml2js = require('xml2js');
 var config = require('./config');
 var routes = require('./app/routes');
 var Mission = require('./models/mission');
+var Common = require('./Common');
 
 var app = express();
 
@@ -97,71 +98,13 @@ app.put('/api/missions', function (req, res, next) {
   }
 });
 
-app.get('/api/missions', function (req, res, next) {
+app.get('/api/missionList', function (req, res, next) {
 
-  var p = req.query;
-  console.log('id',p.isDone);
-  if (p.id) {
-    async.auto({
-        get_child_num: function (callback) {
-          Mission
-            .aggregate()
-            .match({parentId: {$ne: null}})
-            .group({_id: '$parentId', num: {$sum: 1}})
-            .exec(function (err, res) {
-              callback(null, res);
-            });
-        },
-        get_child_num_done: function (callback) {
-          Mission
-            .aggregate()
-            .match({parentId: {$ne: null}, isDone: true})
-            .group({_id: '$parentId', num: {$sum: 1}})
-            .exec(function (err, res2) {
-              callback(null, res2);
-            });
-        },
-        get_plans: function (callback) {
-          var para = {'isDone': p.isDone, "parentId": p.id};
-          Mission
-            .find(para)
-            .exec(function (err, missions) {
-              if (err) return next(err);
-              console.log('get_plansxx',missions);
-              callback(null, missions);
-            });
-        },
+  let id = req.query.id;
+  let type = req.query.type;
+  let selection = req.query.selection;
 
-      },
-      function (err, results) {
-        var plans = results.get_plans.map(function (item) {
-          let child = results.get_child_num.find((n) => n._id.equals(item._id));
-          var childNum = child? child.num : 0;
-          let childDone = results.get_child_num_done.find((n) => n._id.equals(item._id));
-          var childNumDone = childDone ? childDone.num : 0;
-          let plan = {
-            _id: item._id,
-            parentId: item.parentId,
-            name: item.name,
-            description: item.description,
-            type: item.type,
-            createTime: item.createTime,
-            updateTime: item.updateTime,
-            dueTime: item.dueTime,
-            isDone: item.isDone,
-            tags: item.tags,
-            status:item.status,
-            childNum: childNum,
-            childNumDone: childNumDone
-          };
-          return plan;
-        })
-
-        //console.log('subitems',plans );
-        res.send(plans)
-      }
-    );
-  }
+  Common.getPlan('test111');
 
 });
 

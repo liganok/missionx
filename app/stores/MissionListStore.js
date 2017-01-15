@@ -7,31 +7,27 @@ class MissionListStore {
   constructor() {
     this.bindActions(MissionListActions);
     this.bindAction(AddMissionActions.addMissionSuccess, this.handleAddMissionSuccess);
-    this.missions = [];
-    this.isDone;
-    this.missionId = '';
+    this.list = [];
+    this.item = {};
+    this.selection = {todo:true,done:false};
+    this.selectionPara = {isDone:{$in:[false,false]}};
   }
 
-  onGetMissionsSuccess(data) {
+  onGetListSuccess(data) {
     this.missions = data;
   }
 
-  onChangeStatus(event) {
+  onUpdateIsDone(event) {
     this.isDone = event.target.checked;
     this.missionId = event.target.parentNode.parentNode.id;
     MissionListActions.updateStatus(this.missionId, this.isDone);
   }
 
-  onUpdateMissionsSuccess(data) {
-    for (var i in this.missions) {
-      if (this.missions[i]._id == this.missionId) {
-        this.missions[i].isDone = this.isDone;
-        this.missions.splice(i, 1);
-      }
-    }
+  onUpdateIsDoneSuccess(data) {
+
   }
 
-  onUpdateMissionsFail(errorMessage) {
+  onUpdateIsDoneFail(errorMessage) {
     alert(errorMessage);
   }
 

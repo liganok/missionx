@@ -3,18 +3,20 @@ import alt from '../alt';
 class MissionListActions {
   constructor() {
     this.generateActions(
-      'getMissionsSuccess',
-      'getMissionsFail',
-      'updateMissionsSuccess',
-      'updateMissionsFail',
-      'changeStatus'
+      'getListSuccess',
+      'getListFail',
+      'updateIsDoneSuccess',
+      'updateIsDoneFail',
+      'updateIsDone',
+      'selectTodo',
+      'selectDone'
     );
   }
 
-  getMissions(para) {
+  getList(para) {
     $.ajax({
       type: 'GET',
-      url: '/api/missions',
+      url: '/api/missionList',
       data:para
     }).done((data)=> {
       this.actions.getMissionsSuccess(data);
