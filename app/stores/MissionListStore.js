@@ -14,7 +14,7 @@ class MissionListStore {
   }
 
   onGetListSuccess(data) {
-    this.missions = data;
+    this.list = data;
   }
 
   onUpdateIsDone(event) {
@@ -65,7 +65,7 @@ class MissionListStore {
     }
 
     var para = {type:"TASK",isDone:status};
-    MissionListActions.getMissions(para);
+    MissionListActions.getList(para);
   }
 
   onSelectDone(event){
@@ -95,7 +95,7 @@ class MissionListStore {
     }
 
     var para = {type:"TASK",isDone:status};
-    MissionListActions.getMissions(para);
+    MissionListActions.getList(para);
   }
 
 }

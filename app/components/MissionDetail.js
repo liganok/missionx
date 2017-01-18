@@ -50,12 +50,12 @@ class MissionDetail extends React.Component {
         <div className="nav nav-list nav-divider">
           <li className="nav-divider"></li>
         </div>
-        <blockquote>
+        <div className="headbox">
           <input type="checkbox"/>
           <span style={{marginLeft: 4}}>{this.state.mission.name}</span>
           {/*<span className="badge pull-right">11/20</span>*/}
           <small>{this.state.mission.name}</small>
-        </blockquote>
+        </div>
 
         <div>
           <small>Sub items</small>

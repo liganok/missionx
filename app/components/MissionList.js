@@ -2,8 +2,6 @@ import React from 'react';
 import {Link} from 'react-router';
 import MissionListStore from '../stores/MissionListStore';
 import MissionListActions from '../actions/MissionListActions';
-import AddMission from './AddMission';
-
 
 class MissionList extends React.Component {
   constructor(props) {
@@ -15,7 +13,7 @@ class MissionList extends React.Component {
   componentDidMount() {
     MissionListStore.listen(this.onChange);
     var para = this.props.para;
-    MissionListActions.getList(para);
+    MissionListActions.getList(this.state.selectionPara);
   }
 
   componentWillUnmount() {
@@ -43,8 +41,7 @@ class MissionList extends React.Component {
 
     return (
       <div>
-        <AddMission para={{type: "TASK"}}/>
-        <div className="" style={{marginTop: 5}}>
+        <div>
           <input type="checkbox" checked={this.state.selection.todo} onChange={MissionListActions.selectToDo}/>
           <span style={{marginRight: 5}}><small> To Do</small></span>
           <input type="checkbox" checked={this.state.selection.done} onChange={MissionListActions.selectDone}/>

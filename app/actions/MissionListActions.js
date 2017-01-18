@@ -19,21 +19,21 @@ class MissionListActions {
       url: '/api/missionList',
       data:para
     }).done((data)=> {
-      this.actions.getMissionsSuccess(data);
+      this.actions.getListSuccess(data);
     }).fail((jqxhr)=> {
-      this.actions.getMissionsFail(jqxhr.responseJSON.message);
+      this.actions.getListFail(jqxhr.responseJSON.message);
     });
   }
 
   updateStatus(missionId,isDone){
     $.ajax({
       type: 'PUT',
-      url: '/api/missions',
+      url: '/api/mission',
       data: {isDone:isDone, missionId:missionId}
     }).done((data)=>{
-      this.actions.updateMissionsSuccess(data);
+      this.actions.updateIsDoneSuccess(data);
     }).fail((jqxhr)=>{
-      this.actions.updateMissionsFail(jqxhr.responseJSON.message);
+      this.actions.updateIsDoneFail(jqxhr.responseJSON.message);
     });
   }
 
