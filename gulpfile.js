@@ -107,14 +107,14 @@ gulp.task('browserify-watch', ['browserify-vendor'], function () {
  | Compile LESS stylesheets.
  |--------------------------------------------------------------------------
  */
-gulp.task('styles', function () {
+/*gulp.task('styles', function () {
   return gulp.src([
     'app/stylesheets/bootstrap.css',
     'app/stylesheets/cust.css'])
     .pipe(concat('main.css'))
     .pipe(gulpif(production, uglify({mangle: false})))
     .pipe(gulp.dest('public/css'));
-});
+});*/
 
 gulp.task('watch', function () {
   gulp.watch('app/stylesheets/**/*.css', ['styles']);
