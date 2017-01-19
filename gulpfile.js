@@ -117,7 +117,7 @@ gulp.task('browserify-watch', ['browserify-vendor'], function () {
 });*/
 
 gulp.task('watch', function () {
-  gulp.watch('app/stylesheets/**/*.css', ['styles']);
+  gulp.watch('app/stylesheets/**/*.css');
 });
 
 gulp.task('default', ['styles', 'vendor', 'browserify-watch', 'watch']);
