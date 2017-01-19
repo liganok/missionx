@@ -112,7 +112,6 @@ gulp.task('styles', function () {
     'app/stylesheets/bootstrap.css',
     'app/stylesheets/cust.css'])
     .pipe(concat('main.css'))
-    .pipe(gulpif(production, uglify({mangle: false})))
     .pipe(gulp.dest('public/css'));
 });
 
