@@ -3,6 +3,7 @@ import alt from '../alt';
 class AddMissionActions {
   constructor() {
     this.generateActions(
+
       'addMissionSuccess',
       'addMissionFail',
       'updateName'
