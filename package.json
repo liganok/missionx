@@ -1,10 +1,9 @@
 {
   "name": "mission",
-  "description": "Character voting app for EVE Online",
-  "version": "1.0.0",
+  "description": "missionx",
+  "version": "0.2.0",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/sahat/newedenfaces-react"
+    "type": "git"
   },
   "main": "server.js",
   "scripts": {
