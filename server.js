@@ -16,58 +16,32 @@ import Config from './config';
 import Mission from './models/mission';
 import routes from './app/routes';
 
-let app = Express();
-Mongoose.connect(Config.database);
-Mongoose.connection.on('error', function () {
-  console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?'.red);
-});
+import Business from './server/biz/Business';
+import {TYPE_INBOX,TYPE_TASK,TYPE_PLAN } from './server/Const';
 
-app.set('port',process.env.PORT || 3000);
-app.use(Logger('dev'));
-app.use(BodyParser.json());
-app.use(BodyParser.urlencoded({extended: false}));
-app.use(Express.static(Path.join(__dirname, 'public')));
+
+let app = Express();
+{
+  Mongoose.connect(Config.database);
+  Mongoose.connection.on('error', function () {
+    console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?'.red);
+  });
+
+  app.set('port',process.env.PORT || 3000);
+  app.use(Logger('dev'));
+  app.use(BodyParser.json());
+  app.use(BodyParser.urlencoded({extended: false}));
+  app.use(Express.static(Path.join(__dirname, 'public')));
+}
 
 app.post('/api/mission', function (req, res, next) {
-  let name = req.body.name;
-  let time = new Date().getTime();
-  let _id = Mongoose.Types.ObjectId();
-  let parentId = req.body.parentId;
-  console.log(parentId);
-
-  console.log(req.body.type);
-
-  if (req.body.type == 'PLAN') {
-    parentId = null;
-    let type = 'PLAN';
-  }
-  if (req.body.type == 'TASK') {
-    if (req.body.parentId) {
-      parentId = req.body.parentId
-    } else {
-      parentId = null;
-    }
-  }
-
-  try {
-    var mission = new Mission({
-      _id: _id,
-      parentId: parentId,
-      name: name,
-      type: type,
-      description: name,
-      createTime: time,
-      updateTime: time,
-      status: 'ACTIVE'
-    });
-    mission.save(function (err) {
-      if (err) return next(err);
-      res.send({message: name + 'has been added successfully!'});
-    });
-
-  } catch (e) {
-    res.status(404).send({message: name + ' is not saved.'});
-  }
+  let item = {
+    _id:Mongoose.Types.ObjectId(),
+    name:req.body.name,
+    description:req.body.description,
+    type:req.body.type
+  };
+  res.send(Business.addItem(item));
 });
 
 app.put('/api/missions', function (req, res, next) {
@@ -102,7 +76,6 @@ app.get('/api/missionList', function (req, res, next) {
 app.get('/api/plans', function (req, res, next) {
 
   var p = req.query;
-  console.log('test hello');
   console.log(p.isDone);
 
   Async.auto({
@@ -309,6 +282,13 @@ app.put('/api/missionDel', function (req, res, next) {
       return res.send({message: mission.name + ' has been deleted.'});
     });
   });
+});
+
+app.get('/api/test', function (req, res, next) {
+  //res.send(Business.addTask());
+  //res.send(Business.updateTask());
+ res.send(Business.removeTask());
+
 });
 
 app.use(function (req, res) {
