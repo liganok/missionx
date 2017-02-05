@@ -1,26 +1,35 @@
 'use strict';
+import Async from 'async';
 import {TYPE_INBOX,TYPE_TASK,TYPE_PLAN } from '../Const';
 import Utils from '../Utils';
 
 class Business{
 
   static getPlanList(){
-    return Utils.saveMission({});
+    return Utils.findMissionList({type:TYPE_PLAN});
   }
 
   static getTaskList(){
-
+    return Utils.findMissionList({type:TYPE_TASK});
   }
 
-  static getPlan(){
-
+  static getGeneralList(condition){
+    return Utils.findMissionList(condition);
   }
 
-  static getTask(){
+  static getItemwithSubList(id){
+    async function f() {
+      let item = await Utils.findMissionList({_id:id});
+      let subList = await Utils.findMissionList({parentId:id});
+      return {item:item,subList:subList};
+    }
+    return f();
   }
+
 
   static addItem(item){
     return Utils.saveMission(item);
+
   }
 
   static updatePlan(){

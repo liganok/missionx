@@ -36,7 +36,7 @@ let app = Express();
 
 app.post('/api/mission', function (req, res, next) {
   let item = {
-    _id:Mongoose.Types.ObjectId(),
+    parentId:req.body.parentId,
     name:req.body.name,
     description:req.body.description,
     type:req.body.type
@@ -161,26 +161,15 @@ app.get('/api/plans', function (req, res, next) {
 
 app.get('/api/tasks', function (req, res, next) {
 
-  var p = req.query;
+  let condition = {
+    isDone:req.query.isDone,
+    type:TYPE_TASK
+  };
 
-  console.log(p.isDone);
-
-  Mission
-    .find({})
-    .exec(function (err, missions_tmp) {
-      if (err) return next(err);
-      var parentIdArr = missions_tmp.map(function (mission) {
-        return mission.parentId
-      });
-      //console.log(parentIdArr);
-      var para = {'isDone': p.isDone, '_id': {$nin: parentIdArr}, 'type': {$ne: 'PLAN'}};
-      Mission
-        .find(para)
-        .exec(function (err, missions) {
-          if (err) return next(err);
-          res.send(missions);
-        });
-    });
+  Business.getGeneralList(condition)
+    .then((list)=>{
+    res.send(list);
+    })
 
 });
 
@@ -287,7 +276,13 @@ app.put('/api/missionDel', function (req, res, next) {
 app.get('/api/test', function (req, res, next) {
   //res.send(Business.addTask());
   //res.send(Business.updateTask());
- res.send(Business.removeTask());
+  let promise = Business.getItemwithSubList({_id:'5896919ca63ea406b976b67b'});
+  promise.then(function (v) {
+    console.log('tmp1',v);
+    res.send(v);
+  })
+  //console.log('tmp1',tmp);
+
 
 });
 

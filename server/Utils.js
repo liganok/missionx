@@ -6,24 +6,16 @@ import Mission from '../models/mission';
 class Utils {
   static saveMission(item) {
     if (!item.name) return {message: 'Name is empty!'};
-    let _id = Mongoose.Types.ObjectId();
-    try {
-      let mission = new Mission({
-        _id: _id,
-        parentId: item.parentId,
-        name: item.name,
-        type: item.type,
-        description: item.description,
-        status: 'ACTIVE'
-      });
-      mission.save(function (err) {
-        if (err) return next(err);
-        return {message: 'has been updated successfully!'};
-      });
-
-    } catch (e) {
-      return {message: item.name + ' is not saved.'};
-    }
+    let mission = new Mission({
+      _id: Mongoose.Types.ObjectId(),
+      parentId: item.parentId,
+      name: item.name,
+      type: item.type,
+      description: item.description,
+      status: 'ACTIVE'
+    });
+    let promise = mission.save();
+    return promise;
   }
 
   static updateMission(item) {
@@ -37,15 +29,8 @@ class Utils {
     if (item.parentId) updateFields.parentId = item.parentId;
     if (item.dueTime) updateFields.dueTime = item.dueTime;
 
-    try {
-      Mission.update({'_id': item._id}, {$set: updateFields}, function (err) {
-        if (err) return next(err);
-        return {message: item.name + 'has been updated successfully!'};
-      });
-
-    } catch (e) {
-      return {message: item.name + ' is not saved.'};
-    }
+    let promise = mission.update(updateFields);
+    return promise;
   }
 
   static removeMission(item) {
@@ -60,16 +45,27 @@ class Utils {
     if (item.parentId) removeCondition.parentId = item.parentId;
     if (item.dueTime) removeCondition.dueTime = item.dueTime;
 
-    try {
-      Mission.remove(removeCondition, function (err) {
-        if (err) return next(err);
-        return {message: item.name + 'has been removed successfully!'};
-      });
-
-    } catch (e) {
-      return {message: item.name + ' is not removed.'};
-    }
+    let promise = mission.remove(removeCondition);
+    return promise;
   }
+
+  static async findMissionList(item) {
+    //if (!item) return {message: 'No item found!'};
+    let condition = {};
+    if (item._id) condition._id = item._id;
+    if (item.name) condition.name = item.name;
+    if (item.description) condition.description = item.description;
+    if (item.type) condition.type = item.type;
+    if (item.status) condition.status = item.status;
+    if (item.isDone) condition.isDone = item.isDone;
+    if (item.parentId) condition.parentId = item.parentId;
+    if (item.dueTime) condition.dueTime = item.dueTime;
+
+    let query = Mission.find(condition);
+    let promise = query.exec();
+    return promise;
+  }
+
 }
 
 export default Utils;
