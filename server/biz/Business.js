@@ -17,7 +17,7 @@ class Business{
     return Utils.findMissionList(condition);
   }
 
-  static getItemwithSubList(id){
+  static getItemWithSubList(id){
     async function f() {
       let item = await Utils.findMissionList({_id:id});
       let subList = await Utils.findMissionList({parentId:id});

@@ -54,7 +54,7 @@ class MissionDetail extends React.Component {
         <div className="nav nav-list nav-divider">
           <li className="nav-divider"></li>
         </div>
-        <div className="pt-card pt-interactive">
+        <div className="headbox">
           <Checkbox lable ={this.state.mission.name}>
             {this.state.mission.name}
           </Checkbox>

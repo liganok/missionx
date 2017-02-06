@@ -9,7 +9,7 @@ class MissionListActions {
       'updateIsDoneFail',
       'updateIsDone',
       'selectTodo',
-      'selectDone'
+      'selectDone',
     );
   }
 

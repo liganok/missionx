@@ -111,7 +111,6 @@ gulp.task('browserify-watch', ['browserify-vendor'], function () {
 gulp.task('styles', function () {
     return gulp.src([
         'app/stylesheets/bootstrap.css',
-        'app/stylesheets/blueprint.css',
         'app/stylesheets/cust.css'])
         .pipe(concat('main.css'))
         .pipe(minifyCSS())

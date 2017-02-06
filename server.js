@@ -66,9 +66,15 @@ app.put('/api/missions', function (req, res, next) {
 
 app.get('/api/missionList', function (req, res, next) {
 
-  let id = req.query.id;
-  let type = req.query.type;
-  let selection = req.query.selection;
+  let condition = {
+    isDone:req.query.isDone,
+    type:req.query.type
+  };
+
+  Business.getGeneralList(condition)
+    .then((list)=>{
+      res.send(list);
+    })
 
 
 });
@@ -276,7 +282,7 @@ app.put('/api/missionDel', function (req, res, next) {
 app.get('/api/test', function (req, res, next) {
   //res.send(Business.addTask());
   //res.send(Business.updateTask());
-  let promise = Business.getItemwithSubList({_id:'5896919ca63ea406b976b67b'});
+  let promise = Business.getItemWithSubList({_id:'5896919ca63ea406b976b67b'});
   promise.then(function (v) {
     console.log('tmp1',v);
     res.send(v);

@@ -98,6 +98,10 @@ class MissionListStore {
     MissionListActions.getList(para);
   }
 
+  onInitState(para){
+    alert(para);
+  }
+
 }
 
 export default alt.createStore(MissionListStore);

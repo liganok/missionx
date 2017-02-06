@@ -5,7 +5,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <MissionList para = {{type:'PLAN'}}/>
+        <MissionList type = {'TASK'} isDone = {false}/>
       </div>
     );
   }
