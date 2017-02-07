@@ -11,13 +11,10 @@ class MissionList extends React.Component {
   }
 
   componentDidMount() {
+    //alert(JSON.stringify(this.state));
+    //MissionListStore.initMissionStore2();
     MissionListStore.listen(this.onChange);
-    let para = {
-      _id:this.props._id,
-      type:this.props.type,
-      isDone:this.props.isDone
-    };
-    MissionListActions.getList(para);
+    MissionListActions.getList(this.state.selection);
   }
 
   componentWillUnmount() {
@@ -46,7 +43,7 @@ class MissionList extends React.Component {
     return (
       <div>
         <div>
-          <input type="checkbox" checked={this.state.selection.todo} onChange={MissionListActions.selectToDo}/>
+          <input type="checkbox" value={this.props} checked={this.state.selection.todo} onChange={MissionListActions.isDoneChange}/>
           <span style={{marginRight: 5}}><small> To Do</small></span>
           <input type="checkbox" checked={this.state.selection.done} onChange={MissionListActions.selectDone}/>
           <span><small> Done</small></span>

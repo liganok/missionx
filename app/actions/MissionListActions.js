@@ -10,6 +10,7 @@ class MissionListActions {
       'updateIsDone',
       'selectTodo',
       'selectDone',
+      'isDoneChange'
     );
   }
 
@@ -17,7 +18,7 @@ class MissionListActions {
     $.ajax({
       type: 'GET',
       url: '/api/missionList',
-      data:para
+      data:{'condition':para}
     }).done((data)=> {
       this.actions.getListSuccess(data);
     }).fail((jqxhr)=> {

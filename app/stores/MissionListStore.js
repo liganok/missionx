@@ -9,25 +9,55 @@ class MissionListStore {
     //this.bindAction(AddMissionActions.addMissionSuccess, this.handleAddMissionSuccess);
     this.list = [];
     this.item = {};
-    this.selection = {todo:true,done:false};
+    //this.selection = {todo:true,done:false};
     this.selectionPara = {isDone:{$in:[false,false]}};
+    this.data = {};
+    this.uiContral = {};
+    this.selection ={};
+
+  }
+
+  static initMissionStore(props){
+
+    let isDone;
+    let todoStatus = props.checkbox.status.todo;
+    let doneStatus = props.checkbox.status.done;
+    if(todoStatus && doneStatus) isDone = {$in:[true,false]};
+    if(todoStatus && !doneStatus) isDone = {$in:[false,false]};
+    if(!todoStatus && doneStatus) isDone = {$in:[true,true]};
+    if(!todoStatus && !doneStatus) isDone = null;
+
+    this.selection = {
+      _id:props._id,
+      parentId: props.parentId,
+      type:props.type,
+      isDone:isDone
+    };
+
+    this.uiContral = {
+      checkbox:{status:{todo:todoStatus,done:doneStatus}}
+    };
+  }
+
+  static initMissionStore2(){
+    alert(JSON.stringify(this.selection));
   }
 
   onGetListSuccess(data) {
     this.list = data;
   }
 
-  onUpdateIsDone(event) {
+  onUpdateisDone(event) {
     this.isDone = event.target.checked;
     this.missionId = event.target.parentNode.parentNode.id;
     MissionListActions.updateStatus(this.missionId, this.isDone);
   }
 
-  onUpdateIsDoneSuccess(data) {
+  onUpdateisDoneSuccess(data) {
 
   }
 
-  onUpdateIsDoneFail(errorMessage) {
+  onUpdateisDoneFail(errorMessage) {
     alert(errorMessage);
   }
 
@@ -98,8 +128,10 @@ class MissionListStore {
     MissionListActions.getList(para);
   }
 
-  onInitState(para){
-    alert(para);
+  onIsDoneChange(event){
+    alert('test2  '+JSON.stringify(event.target.value.type));
+    this.selection.todo = event.target.checked;
+    //alert(event.target.checked);
   }
 
 }

@@ -66,16 +66,12 @@ app.put('/api/missions', function (req, res, next) {
 
 app.get('/api/missionList', function (req, res, next) {
 
-  let condition = {
-    isDone:req.query.isDone,
-    type:req.query.type
-  };
-
+  let condition = req.query.condition;
+  console.log(condition);
   Business.getGeneralList(condition)
     .then((list)=>{
       res.send(list);
     })
-
 
 });
 

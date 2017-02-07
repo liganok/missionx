@@ -5,7 +5,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <MissionList type = {'TASK'} isDone = {false}/>
+        <MissionList type = {'TASK'} checkbox={{status:{todo:true,done:false}}}/>
       </div>
     );
   }
