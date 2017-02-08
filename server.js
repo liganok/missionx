@@ -65,11 +65,11 @@ app.put('/api/missions', function (req, res, next) {
 });
 
 app.get('/api/missionList', function (req, res, next) {
-
   let condition = req.query.condition;
   console.log(condition);
   Business.getGeneralList(condition)
     .then((list)=>{
+    console.log(list);
       res.send(list);
     })
 

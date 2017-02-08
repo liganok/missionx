@@ -57,7 +57,7 @@ class Utils {
     if (item.description) condition.description = item.description;
     if (item.type) condition.type = item.type;
     if (item.status) condition.status = item.status;
-    condition.isDone = item.isDone;
+    if (item.isDone) condition.isDone = item.isDone;
     if (item.parentId) condition.parentId = item.parentId;
     if (item.dueTime) condition.dueTime = item.dueTime;
 

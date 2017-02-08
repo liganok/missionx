@@ -1,11 +1,11 @@
 import React from 'react';
-import MissionList from './MissionList';
+import List from './List';
 
 class Home extends React.Component {
   render() {
     return (
       <div>
-        <MissionList type = {'TASK'} checkbox={{status:{todo:true,done:false}}}/>
+        <List />
       </div>
     );
   }
