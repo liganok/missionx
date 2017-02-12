@@ -176,6 +176,7 @@ app.get('/api/tasks', function (req, res, next) {
 });
 
 app.get('/api/mission', function (req, res, next) {
+  console.log('get mission' + req.query.id);
   if (req.query.id) {
     console.log('get mission' + req.query.id);
     var para = {"_id": req.query.id};

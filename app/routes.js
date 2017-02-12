@@ -6,7 +6,7 @@ import Inbox from './components/Inbox';
 import Trash from './components/Trash';
 import Tasks from './components/Tasks';
 import Plans from './components/Plans';
-import MissionDetail from './components/MissionDetail';
+import Detail from './components/Detail';
 
 
 export default (
@@ -17,6 +17,6 @@ export default (
     <Route path='/tasks' component={Tasks}/>
     <Route path='/plans' component={Plans}/>
     <Route path='/trash' component={Trash}/>
-    <Route path='/detail/:id' component={MissionDetail}/>
+    <Route path='/detail/:id' component={Detail}/>
   </Route>
 );
