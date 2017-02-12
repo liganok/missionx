@@ -1,13 +1,13 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var missionSchema = new mongoose.Schema({
+let missionSchema = new mongoose.Schema({
   name: String,
   parentId: mongoose.Schema.Types.ObjectId,
   type: String,
   dueTime: Date,
   description: String,
   tags: {type:String},
-  status: {type:String, default:'DRAFT'}, //[draft,active,deleted]
+  status: {type:String, default:'A'}, //[active:A,deleted:D]
   isDone: { type: Boolean, default: false }
 },{timestamps:true});
 

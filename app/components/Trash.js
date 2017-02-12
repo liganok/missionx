@@ -3,7 +3,7 @@ import AddMission from './AddMission';
 import List from './List';
 
 
-class Tasks extends React.Component {
+class Trash extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,11 +18,10 @@ class Tasks extends React.Component {
   render() {
     return (
       <div>
-        <AddMission type={'TASK'} onSaved={this.handleSaved.bind(this)}/>
-        <List type={'TASK'} updateFlag={this.state.updateFlag}/>
+        <List status={'D'} />
       </div>
     );
   }
 }
 
-export default Tasks;
+export default Trash;

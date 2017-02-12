@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import {Link} from 'react-router';
+import ListItem from './ListItem';
 
 
 function convertToDoCondition(para) {
@@ -15,16 +16,20 @@ function convertToDoCondition(para) {
 }
 
 const propTypes = {
-  mParentId:React.PropTypes.string,
-  mType:React.PropTypes.string,
+  parentId:React.PropTypes.string,
+  type:React.PropTypes.string,
+  status:React.PropTypes.string,
   todoIsChecked:React.PropTypes.bool,
-  doneIsChecked:React.PropTypes.bool
+  doneIsChecked:React.PropTypes.bool,
+  updateFlag:React.PropTypes.bool
 };
 
 const defaultProps = {
-  mType:'TASK',
+  type:'TASK',
+  status:'A',
   todoIsChecked: true,
-  doneIsChecked: true
+  doneIsChecked: false,
+  updateFlag:false
 };
 
 class List extends React.Component {
@@ -53,7 +58,9 @@ class List extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
+    if(nextProps.updateFlag){
+      this.getList();
+    }
   }
 
   onChange(state) {
@@ -67,7 +74,9 @@ class List extends React.Component {
     });
 
     let condition = {
+      parentId:this.props.parentId,
       type:this.props.type,
+      status:this.props.type? 'A':null,
       isDone:isDone
     };
     $.ajax({
@@ -90,13 +99,14 @@ class List extends React.Component {
     this.getList();
   }
 
+  handleStatusChanged(){
+    this.getList();
+  }
+
   render() {
     let list = this.state.list.map((item, index) => {
       return (
-        <li id={item._id} className='list-group-item animated fadeIn'>
-          <input type="checkbox" checked={item.isDone} />
-          <Link to={'detail/' + item._id}><span className="H5" style={{marginLeft: 4}}>{item.name}</span></Link>
-        </li>
+        <ListItem key={item._id} id={item._id} checked={item.isDone} name={item.name} onStatusChanged={this.handleStatusChanged.bind(this)}/>
       );
     });
 

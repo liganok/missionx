@@ -1,47 +1,32 @@
 import React from 'react';
-import {Link} from 'react-router';
-import MissionDetailStore from '../stores/MissionDetailStore';
-import MissionDetailActions from '../actions/MissionDetailActions';
 import AddMission from './AddMission';
 import {Checkbox} from "@blueprintjs/core";
 
 class MissionDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state = MissionDetailStore.getState();
-    this.onChange = this.onChange.bind(this);
+    this.state={
+      updateFlag:false
+    };
   }
 
   componentDidMount() {
-    MissionDetailStore.listen(this.onChange);
-    this.state.selectionPara.id = this.props.params.id;
-    MissionDetailActions.getMission(this.state.selectionPara);
-    MissionDetailActions.getSubItems(this.state.selectionPara);
 
   }
 
   componentWillUnmount() {
-    MissionDetailStore.unlisten(this.onChange);
   }
 
   onChange(state) {
     this.setState(state);
   }
 
+  handleSaved(){
+    this.setState({updateFlag:true});
+  }
+
 
   render() {
-    let MissionDetail = this.state.subItems.map((mission, index) => {
-      return (
-        <div key={mission._id} id={mission._id} className='list-group-item animated fadeIn'>
-          <input type='checkbox' checked={mission.isDone}
-                 onChange={MissionDetailActions.changeStatus}/>
-          <a href={"../detail/" + mission._id}><span className="H5"
-                                                     style={{marginLeft: 4}}>{mission.name}</span></a>
-          {mission.childNum > 0 ?
-            <span className="badge">{mission.childNumDone}/{mission.childNum}</span> : ''}
-        </div>
-      );
-    });
 
     return (
       <div>
@@ -62,22 +47,8 @@ class MissionDetail extends React.Component {
 
         <div>
           <small>Sub items</small>
-          <div className="">
-            <AddMission para={{type: "TASK", parentId: this.props.params.id}}/>
-            <div className="" style={{marginTop: 5}}>
-              <input type="checkbox" checked={this.state.selection.todo}
-                     onChange={MissionDetailActions.selectToDo}/>
-              <span style={{marginRight: 5}}><small> To Do</small></span>
-              <input type="checkbox" checked={this.state.selection.done}
-                     onChange={MissionDetailActions.selectDone}/>
-              <span><small> Done</small></span>
-            </div>
-            <div style={{marginTop: 2}}>
-              <div className='list-group'>
-                {MissionDetail}
-              </div>
-            </div>
-          </div>
+          <AddMission type={'TASK'} parentId={this.props.id} onSaved={this.handleSaved.bind(this)}/>
+          <List parentId={this.props.id} updateFlag={this.state.updateFlag}/>
         </div>
       </div>
     );

@@ -1,35 +1,58 @@
 import React from 'react';
-import AddMissionStore from '../stores/AddMissionStore';
-import AddMissionActions from '../actions/AddMissionActions';
+
+
+const propTypes = {
+  parentId:React.PropTypes.string,
+  type:React.PropTypes.bool,
+  description:React.PropTypes.string
+};
+
+const defaultProps = {
+  type: 'TASK'
+};
 
 class AddMission extends React.Component {
   constructor(props) {
     super(props);
-    this.state = AddMissionStore.getState();
-    this.onChange = this.onChange.bind(this);
+    this.state = {
+      name:''
+    };
   }
 
   componentDidMount() {
-    AddMissionStore.listen(this.onChange);
   }
 
   componentWillUnmount() {
-    AddMissionStore.unlisten(this.onChange);
   }
 
   onChange(state) {
     this.setState(state);
   }
 
-  handleSubmit(event) {
-    var para = {
+  handleUpdateName(e){
+    this.setState({name:e.target.value});
+  }
+
+  handleSubmit(e) {
+
+    if (!this.state.name.trim()) return;
+
+    let para = {
       name: this.state.name.trim(),
-      type: this.props.para.type,
-      parentId: this.props.para.parentId
+      type: this.props.type,
+      parentId: this.props.parentId
     };
-    if (para.name) {
-      AddMissionActions.addMission(para);
-    }
+    $.ajax({
+      type: 'POST',
+      url: '/api/mission',
+      data: para
+    }).done((data)=>{
+      this.setState({name:''});
+      if(this.props.onSaved){
+        this.props.onSaved();
+      }
+    }).fail((jqxhr)=>{
+    });
   }
 
   render() {
@@ -37,7 +60,7 @@ class AddMission extends React.Component {
       <div>
         <div className="input-group">
           <input type="text" className="form-control" ref='nameTextField' value={this.state.name}
-                 onChange={AddMissionActions.updateName} autoFocus/>
+                 onChange={this.handleUpdateName.bind(this)} autoFocus/>
           <span className="input-group-btn">
             <button className="btn btn-default" type="button" onClick={this.handleSubmit.bind(this)}>Add</button>
           </span>
@@ -47,6 +70,8 @@ class AddMission extends React.Component {
   }
 }
 
+AddMission.propTypes = propTypes;
+AddMission.defaultProps = defaultProps;
 
 export default AddMission;
 

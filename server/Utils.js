@@ -12,7 +12,7 @@ class Utils {
       name: item.name,
       type: item.type,
       description: item.description,
-      status: 'ACTIVE'
+      status: 'A'
     });
     let promise = mission.save();
     return promise;

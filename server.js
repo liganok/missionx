@@ -278,11 +278,11 @@ app.put('/api/missionDel', function (req, res, next) {
 app.get('/api/test', function (req, res, next) {
   //res.send(Business.addTask());
   //res.send(Business.updateTask());
-  let promise = Business.getItemWithSubList({_id:'5896919ca63ea406b976b67b'});
+  /*let promise = Business.getItemWithSubList({_id:'5896919ca63ea406b976b67b'});
   promise.then(function (v) {
     console.log('tmp1',v);
     res.send(v);
-  })
+  })*/
   //console.log('tmp1',tmp);
 
 
