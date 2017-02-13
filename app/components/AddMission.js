@@ -3,7 +3,7 @@ import React from 'react';
 
 const propTypes = {
   parentId:React.PropTypes.string,
-  type:React.PropTypes.bool,
+  type:React.PropTypes.string,
   description:React.PropTypes.string
 };
 

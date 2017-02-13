@@ -1,5 +1,4 @@
 import React from 'react';
-import {Checkbox} from "@blueprintjs/core";
 
 class ItemDetail extends React.Component {
   constructor(props) {
@@ -11,7 +10,6 @@ class ItemDetail extends React.Component {
   }
 
   componentDidMount() {
-    alert(JSON.stringify(this.props));
     this.getData();
   }
 
@@ -25,7 +23,6 @@ class ItemDetail extends React.Component {
       url: '/api/mission',
       data:{'id':this.props.id}
     }).done((data)=> {
-      alert('s');
       this.setState({item:data[0]});
       $.ajax({
         type: 'GET',
@@ -56,9 +53,9 @@ class ItemDetail extends React.Component {
           <li className="nav-divider"></li>
         </div>
         <div className="headbox">
-          <Checkbox lable ={this.state.item.name}>
+          <checkbox >
             {this.state.item.name}
-          </Checkbox>
+          </checkbox>
         </div>
       </div>
     );

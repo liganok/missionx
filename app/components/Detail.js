@@ -7,8 +7,13 @@ class MissionDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      updateFlag:false
+      updateFlag:false,
+      id:''
     };
+  }
+
+  componentDidMount() {
+    this.setState({id:this.props.id});
   }
 
 
@@ -18,14 +23,13 @@ class MissionDetail extends React.Component {
 
 
   render() {
-
     return (
       <div>
-        <ItemDetail id={this.props.id}/>
+        <ItemDetail id={this.props.params.id}/>
         <div>
           <small>Sub items</small>
-          <AddMission type={'TASK'} parentId={this.props.id} onSaved={this.handleSaved.bind(this)}/>
-          <List parentId={this.props.id} updateFlag={this.state.updateFlag}/>
+          <AddMission type={'TASK'} parentId={this.props.params.id} onSaved={this.handleSaved.bind(this)}/>
+          <List parentId={this.props.params.id} updateFlag={this.state.updateFlag}/>
         </div>
       </div>
     );
