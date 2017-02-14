@@ -29,8 +29,15 @@ class Utils {
     if (item.parentId) updateFields.parentId = item.parentId;
     if (item.dueTime) updateFields.dueTime = item.dueTime;
 
-    let promise = mission.update(updateFields);
-    return promise;
+    async function f() {
+      let mission = await Mission.findById({_id:item._id}).exec();
+      await Object.assign(mission,updateFields);
+      await console.log('mission',mission);
+      let promise = await mission.save();
+      return promise;
+    }
+
+    return f();
   }
 
   static removeMission(item) {
@@ -45,7 +52,7 @@ class Utils {
     if (item.parentId) removeCondition.parentId = item.parentId;
     if (item.dueTime) removeCondition.dueTime = item.dueTime;
 
-    let promise = mission.remove(removeCondition);
+    let promise = Mission.remove(removeCondition);
     return promise;
   }
 

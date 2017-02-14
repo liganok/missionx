@@ -25,7 +25,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  type:'TASK',
   status:'A',
   todoIsChecked: true,
   doneIsChecked: false,
@@ -76,7 +75,7 @@ class List extends React.Component {
     let condition = {
       parentId:this.props.parentId,
       type:this.props.type,
-      status:this.props.type? 'A':null,
+      status:this.props.status,
       isDone:isDone
     };
     $.ajax({

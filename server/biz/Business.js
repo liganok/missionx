@@ -27,18 +27,28 @@ class Business{
   }
 
 
-  static addItem(item){
-    return Utils.saveMission(item);
-
+  static addItem(item) {
+    async function f() {
+      let currentItemPromise = Utils.saveMission(item);
+      let parentItemPromise = async function () {
+        let parent = await Utils.findMissionList({_id: item.parentId})[0];
+        console.log('parent',JSON.stringify(parent));
+        if (parent.type == 'TASK') {
+          parent.type = 'PLAN';
+          return  parent.save();
+        };
+      };
+      let currentItem = await currentItemPromise;
+      let parentItem = await parentItemPromise;
+      return parentItem;
+    }
+    return f();
   }
 
-  static updatePlan(){
-
+  static updateItem(item){
+    return Utils.updateMission(item);
   }
 
-  static updateTask(){
-    return Utils.updateMission({_id:"589593356b5e48170c02a3b7",name:'hello world3',type: TYPE_TASK});
-  }
 
   static deletePlan(){
 
