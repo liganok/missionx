@@ -7,9 +7,9 @@
   },
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node -- server.js",
-    "debug": "nodemon --debug-brk babel-node -- server.js",
-    "watch": "nodemon server.js --exec babel-node --presets es2015,stage-2",
+    "start": "babel-node  server.js",
+    "debug": "babel-node-debug -- server.js",
+    "watch": "nodemon --exec babel-node -- server.js",
     "postinstall": "bower install && gulp build"
   },
   "babel": {
