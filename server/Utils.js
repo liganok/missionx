@@ -73,6 +73,15 @@ class Utils {
     return promise;
   }
 
+  static count(condition){
+    let countPromise = Mission
+      .aggregate()
+      .match(condition.match)
+      .group(condition.group)
+      .exec();
+    return countPromise;
+  }
+
 }
 
 export default Utils;

@@ -44,7 +44,7 @@ app.post('/api/mission', function (req, res, next) {
   Business.addItem(item)
     .then((data) => {
       console.log('/api/mission', data);
-      req.send(data);
+      res.send(data);
     });
 });
 
@@ -56,16 +56,16 @@ app.put('/api/mission', function (req, res, next) {
   console.log('/api/mission', JSON.stringify(condition));
   Business.updateItem(condition)
     .then((data) => {
-      req.send(data);
+      res.send(data);
     });
 });
 
 app.get('/api/missionList', function (req, res, next) {
   let condition = req.query.condition;
-  Business.getGeneralList(condition)
-    .then((list) => {
-      res.send(list);
-    })
+  if (req.query.type == 'PLAN') {
+    Object.assign(condition,{parentId:{$eq: null}});
+  };
+  res.send(Business.getGeneralList(condition));
 
 });
 

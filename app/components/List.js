@@ -81,7 +81,7 @@ class List extends React.Component {
     $.ajax({
       type: 'GET',
       url: '/api/missionList',
-      data:{'condition':condition}
+      data:{'condition':condition,type:this.props.type}
     }).done((data)=> {
       this.setState({list:data});
     }).fail((jqxhr)=> {
