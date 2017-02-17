@@ -3,9 +3,9 @@ import React from 'react';
 class ItemDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
-      item:{},
-      parent:{}
+    this.state = {
+      item: {},
+      parent: {}
     };
   }
 
@@ -16,23 +16,23 @@ class ItemDetail extends React.Component {
   componentWillUnmount() {
   }
 
-  getData(){
+  getData() {
 
     $.ajax({
       type: 'GET',
       url: '/api/mission',
-      data:{'id':this.props.id}
-    }).done((data)=> {
-      this.setState({item:data[0]});
+      data: {'id': this.props.id}
+    }).done((data) => {
+      this.setState({item: data[0]});
       $.ajax({
         type: 'GET',
         url: '/api/mission',
-        data:{id:data[0].parentId}
-      }).done((data)=> {
-        this.setState({parent:data[0]});
-      }).fail((jqxhr)=> {
+        data: {id: data[0].parentId}
+      }).done((data) => {
+        this.setState({parent: data[0]});
+      }).fail((jqxhr) => {
       });
-    }).fail((jqxhr)=> {
+    }).fail((jqxhr) => {
       alert('f');
     });
   }
@@ -45,7 +45,7 @@ class ItemDetail extends React.Component {
         <a href={"../detail/" + this.state.parent._id}>{this.state.parent.name ? this.state.parent.name + '>' : '>'}</a>
         <div className="pull-right">
           <button type="button" className="btn-link">Edit</button>
-          <button type="button" className="btn-link" >Delete
+          <button type="button" className="btn-link">Delete
           </button>
         </div>
         <div className="nav nav-list nav-divider">
