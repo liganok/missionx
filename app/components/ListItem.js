@@ -28,8 +28,8 @@ class ListItem extends React.Component {
     this.setState({checked:e.target.checked});
     $.ajax({
       type: 'PUT',
-      url: '/api/missions',
-      data: {isDone:e.target.checked, missionId:this.props.id}
+      url: '/api/mission',
+      data: {isDone:e.target.checked, _id:this.props.item._id}
     }).done((data)=>{
       if(this.props.onStatusChanged){
         this.props.onStatusChanged();

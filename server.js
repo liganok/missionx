@@ -49,11 +49,8 @@ app.post('/api/mission', function (req, res, next) {
 });
 
 app.put('/api/mission', function (req, res, next) {
-  let condition = {
-    _id: req.body.id,
-    type: req.body.type
-  };
-  console.log('/api/mission', JSON.stringify(condition));
+  let condition = req.body;
+  console.log('put/api/mission', JSON.stringify(condition));
   Business.updateItem(condition)
     .then((data) => {
       res.send(data);
