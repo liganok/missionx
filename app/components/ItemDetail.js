@@ -34,7 +34,6 @@ class ItemDetail extends React.Component {
       });
     }).fail((jqxhr)=> {
       alert('f');
-
     });
   }
 

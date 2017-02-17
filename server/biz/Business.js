@@ -15,8 +15,8 @@ class Business {
 
   static getGeneralList(condition) {
     //return Utils.findMissionList(condition);
-    let list=[];
     async function f() {
+      let list=[];
       let listPromise = Utils.findMissionList(condition);
       let countListAllPromise;
       let countListDonePromise;
@@ -30,14 +30,21 @@ class Business {
       await countListAllPromise.then((data)=>{
         list = list.map((item)=>{
           let newItem=item.toJSON();
-          let childNum = data.find((n)=>n._id.equals(item._id)).num;
+          let child = data.find((n)=>n._id.equals(item._id));
+          let childNum = child? child.num:0;
           Object.assign(newItem,{childNum:childNum});
-          console.log(newItem);
-
           return newItem;
         });
       });
-      console.log(list);
+      await countListDonePromise.then((data)=>{
+        list = list.map((item)=>{
+          let newItem=item;
+          let child = data.find((n)=>n._id.equals(item._id));
+          let childNum = child? child.num:0;
+          Object.assign(newItem,{childDoneNum:childNum});
+          return newItem;
+        });
+      });
       return list;
     }
     return f();

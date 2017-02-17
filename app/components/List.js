@@ -105,7 +105,7 @@ class List extends React.Component {
   render() {
     let list = this.state.list.map((item, index) => {
       return (
-        <ListItem key={item._id} id={item._id} checked={item.isDone} name={item.name} onStatusChanged={this.handleStatusChanged.bind(this)}/>
+        <ListItem key={item._id} item={item} onStatusChanged={this.handleStatusChanged.bind(this)}/>
       );
     });
 

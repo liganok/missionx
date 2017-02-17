@@ -65,8 +65,9 @@ app.get('/api/missionList', function (req, res, next) {
   if (req.query.type == 'PLAN') {
     Object.assign(condition,{parentId:{$eq: null}});
   };
-  res.send(Business.getGeneralList(condition));
-
+  Business.getGeneralList(condition).then((data)=>{
+    res.send(data);
+  });
 });
 
 app.get('/api/mission', function (req, res, next) {
