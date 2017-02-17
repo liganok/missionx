@@ -43,8 +43,7 @@
     "@types/moment": "^2.13.0",
     "@types/es6-shim": "^0.31.32",
     "react-addons-css-transition-group": "^15.4.2",
-    "@blueprintjs/core": "^1.6.0",
-    "@blueprintjs/datetime": "^1.5.0"
+    "antd": "^2.7.1"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",

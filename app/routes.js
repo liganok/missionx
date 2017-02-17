@@ -11,7 +11,7 @@ import Detail from './components/Detail';
 
 export default (
   <Route component={App}>
-    <Route path='/' component={Tasks}/>
+    <Route path='/' component={Plans}/>
     <Route path='/inbox' component={Inbox}/>
     <Route path='/home' component={Home}/>
     <Route path='/tasks' component={Tasks}/>

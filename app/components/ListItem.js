@@ -44,7 +44,7 @@ class ListItem extends React.Component {
 
     return (
       <li id={this.props.item._id} className='list-group-item animated fadeIn'>
-        <input type="checkbox" checked={this.state.checked} onChange={this.handleStatusChange.bind(this)}/>
+        <input type="checkbox" checked={this.props.item.isDone} onChange={this.handleStatusChange.bind(this)}/>
         <a href={'../detail/' + this.props.item._id}><span className="H5" style={{marginLeft: 4}}>{this.props.item.name}</span></a>
         {this.props.item.childNum > 0 ? <span className="badge">{this.props.item.childDoneNum}/{this.props.item.childNum}</span>:''}
       </li>
