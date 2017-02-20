@@ -83,7 +83,7 @@ class Utils {
   }
 
   static migration(){
-    return Mission.update({},{status:'A'});
+    return Mission.updateMany({},{$set:{status:'A'}});
   }
 
 }
