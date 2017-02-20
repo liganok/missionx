@@ -82,6 +82,10 @@ class Utils {
     return countPromise;
   }
 
+  static migration(){
+    return Mission.update({},{status:'A'});
+  }
+
 }
 
 export default Utils;

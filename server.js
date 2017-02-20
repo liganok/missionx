@@ -17,6 +17,7 @@ import Mission from './models/mission';
 import routes from './app/routes';
 
 import Business from './server/biz/Business';
+import Utils from './server/Utils';
 import {TYPE_INBOX, TYPE_TASK, TYPE_PLAN} from './server/Const';
 
 
@@ -93,6 +94,12 @@ app.get('/api/test', function (req, res, next) {
 
 
 });
+app.get('/api/migration', function (req, res, next) {
+  Utils.migration().then((data)=>{
+    res.send(data);
+  });
+});
+
 
 app.use(function (req, res) {
   match({routes: routes, location: req.url}, function (err, redirectLocation, renderProps) {
